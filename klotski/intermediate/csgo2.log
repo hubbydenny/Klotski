@@ -1,0 +1,15 @@
+﻿  combat.cpp
+  entry.cpp
+  movement.cpp
+  prediction.cpp
+  hooks.cpp
+  menu.cpp
+  misc.cpp
+  interfaces.cpp
+  math.cpp
+  schema_system.cpp
+  sdk.cpp
+  vfunc.hpp
+  visuals.cpp
+  Generating Code...
+  csgo2.vcxproj -> C:\Users\warp\Downloads\csgo2-cheat-main(1)\csgo2-cheat-main\build\csgo2.dll
