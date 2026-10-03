@@ -1,0 +1,268 @@
+{
+  "auto_healed": [],
+  "build_number": 14188,
+  "checks": [
+    {
+      "detail": "573 of 578 entries resolve; 5 need re-anchoring",
+      "items": [
+        {
+          "module": "client.dll",
+          "name": "BulkRegenIterator"
+        },
+        {
+          "module": "client.dll",
+          "name": "RegenerateWeaponSkin"
+        },
+        {
+          "module": "client.dll",
+          "name": "RegenerateWeaponSkin_v2"
+        },
+        {
+          "module": "server.dll",
+          "name": "GameSystem_Think_CheckSteamBan"
+        },
+        {
+          "module": "client.dll",
+          "name": "C_CSWeaponBase_UpdateCompositeMaterialSet"
+        }
+      ],
+      "name": "signatures_resolve",
+      "status": "warn"
+    },
+    {
+      "detail": "every pattern matches exactly once in its module",
+      "items": [],
+      "name": "patterns_unique",
+      "status": "pass"
+    },
+    {
+      "detail": "no pattern needed re-anchoring",
+      "items": [],
+      "name": "patterns_healed",
+      "status": "pass"
+    },
+    {
+      "detail": "11 global pairs agree",
+      "items": [
+        {
+          "global": "dwGameRules",
+          "global_rva": "0x255CE50",
+          "module": "client.dll",
+          "ok": true,
+          "signature": "pGameRules",
+          "signature_rva": "0x255CE50"
+        },
+        {
+          "global": "dwSensitivity",
+          "global_rva": "0x255D998",
+          "module": "client.dll",
+          "ok": true,
+          "signature": "pSensitivity",
+          "signature_rva": "0x255D998"
+        },
+        {
+          "global": "dwPrediction",
+          "global_rva": "0x25605A0",
+          "module": "client.dll",
+          "ok": true,
+          "signature": "pPrediction",
+          "signature_rva": "0x25605A0"
+        },
+        {
+          "global": "dwGlowManager",
+          "global_rva": "0x255CE60",
+          "module": "client.dll",
+          "ok": true,
+          "signature": "pGlowManager",
+          "signature_rva": "0x255CE60"
+        },
+        {
+          "global": "dwLocalPlayerController",
+          "global_rva": "0x2538008",
+          "module": "client.dll",
+          "ok": true,
+          "signature": "pLocalPlayerController",
+          "signature_rva": "0x2538008"
+        },
+        {
+          "global": "dwCSGOInput",
+          "global_rva": "0x2576160",
+          "module": "client.dll",
+          "ok": true,
+          "signature": "pCSGOInputInstance",
+          "signature_rva": "0x2576160"
+        },
+        {
+          "global": "dwBuildNumber",
+          "global_rva": "0x61CFE8",
+          "module": "engine2.dll",
+          "ok": true,
+          "signature": "pBuildNumber",
+          "signature_rva": "0x61CFE8"
+        },
+        {
+          "global": "dwNetworkGameClient",
+          "global_rva": "0x91AFC0",
+          "module": "engine2.dll",
+          "ok": true,
+          "signature": "pNetworkGameClient",
+          "signature_rva": "0x91AFC0"
+        },
+        {
+          "global": "dwWindowWidth",
+          "global_rva": "0x91F330",
+          "module": "engine2.dll",
+          "ok": true,
+          "signature": "pWindowWidth",
+          "signature_rva": "0x91F330"
+        },
+        {
+          "global": "dwWindowHeight",
+          "global_rva": "0x91F334",
+          "module": "engine2.dll",
+          "ok": true,
+          "signature": "pWindowHeight",
+          "signature_rva": "0x91F334"
+        },
+        {
+          "global": "dwSoundSystem",
+          "global_rva": "0x535350",
+          "module": "soundsystem.dll",
+          "ok": true,
+          "signature": "pSoundSystem",
+          "signature_rva": "0x535350"
+        }
+      ],
+      "name": "global_twins",
+      "status": "pass"
+    },
+    {
+      "detail": "every module-relative global lands in a data section",
+      "items": [],
+      "name": "globals_in_data",
+      "status": "pass"
+    },
+    {
+      "detail": "462 function targets start after padding",
+      "items": [],
+      "name": "function_prologues",
+      "status": "pass"
+    },
+    {
+      "detail": "no signature global resolves into .text",
+      "items": [],
+      "name": "globals_not_code",
+      "status": "pass"
+    },
+    {
+      "detail": "62 fields agree with the hand-verified engine structs",
+      "items": [],
+      "name": "protobufs_vs_engine",
+      "status": "pass"
+    },
+    {
+      "detail": "every field and global in the feature recipes resolves on this build",
+      "items": [],
+      "name": "verified_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "6 hand-verified offset(s) were verified on an older build — re-check them",
+      "items": [
+        {
+          "feature": "Entity list",
+          "field": "CGameEntitySystem::chunk array",
+          "verified_on": 14184
+        },
+        {
+          "feature": "Entity list",
+          "field": "CEntityIdentity::m_pEntity",
+          "verified_on": 14184
+        },
+        {
+          "feature": "Entity list",
+          "field": "CEntityIdentity::handle",
+          "verified_on": 14184
+        },
+        {
+          "feature": "ESP",
+          "field": "CModel::bone count",
+          "verified_on": 14184
+        },
+        {
+          "feature": "ESP",
+          "field": "CModel::bone names",
+          "verified_on": 14184
+        },
+        {
+          "feature": "Skin changer",
+          "field": "C_CSWeaponBase::composite material set",
+          "verified_on": 14184
+        }
+      ],
+      "name": "verified_manual",
+      "status": "warn"
+    },
+    {
+      "detail": "2 feature hook(s) name a signature that did not resolve",
+      "items": [
+        {
+          "feature": "Skin changer",
+          "module": "client.dll",
+          "signature": "C_CSWeaponBase_UpdateCompositeMaterialSet"
+        },
+        {
+          "feature": "Knife changer",
+          "module": "client.dll",
+          "signature": "C_CSWeaponBase_UpdateCompositeMaterialSet"
+        }
+      ],
+      "name": "verified_hooks",
+      "status": "fail"
+    },
+    {
+      "detail": "no weapon entities in the session",
+      "items": [],
+      "name": "weapons_snapshot",
+      "status": "warn"
+    }
+  ],
+  "client_version": "2000922",
+  "dumper_version": "2.1.8",
+  "generated_at": "2026-10-01T06:35:59.864214200-07:00",
+  "note": "Written by cs2-sdk after every dump. `ok` is false when a check failed; warnings list what to look at. The auto-dump pipeline adds `update`, `auto_healed` and `known_issues`.",
+  "ok": false,
+  "patch_version": "1.41.8.8",
+  "signatures": {
+    "found": 573,
+    "missing": [
+      {
+        "module": "client.dll",
+        "name": "BulkRegenIterator"
+      },
+      {
+        "module": "client.dll",
+        "name": "RegenerateWeaponSkin"
+      },
+      {
+        "module": "client.dll",
+        "name": "RegenerateWeaponSkin_v2"
+      },
+      {
+        "module": "server.dll",
+        "name": "GameSystem_Think_CheckSteamBan"
+      },
+      {
+        "module": "client.dll",
+        "name": "C_CSWeaponBase_UpdateCompositeMaterialSet"
+      }
+    ],
+    "total": 578,
+    "unique_functions": 525
+  },
+  "summary": {
+    "fail": 1,
+    "pass": 8,
+    "warn": 3
+  }
+}

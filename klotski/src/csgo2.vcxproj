@@ -84,14 +84,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="combat\combat.cpp" />
-    <ClCompile Include="config\config.cpp" />
+    <ClCompile Include="features\combat\combat.cpp" />
+    <ClCompile Include="features\config\config.cpp" />
     <ClCompile Include="features\changer\changer.cpp" />
     <ClCompile Include="features\movement\movement.cpp" />
-    <ClCompile Include="features\prediction\prediction.cpp" />
+    <ClCompile Include="features\movement\prediction\prediction.cpp" />
     <ClCompile Include="hooks\hooks.cpp" />
-    <ClCompile Include="menu\menu.cpp" />
-    <ClCompile Include="misc\misc.cpp" />
+    <ClCompile Include="features\menu\menu.cpp" />
+    <ClCompile Include="features\misc\misc.cpp" />
     <ClCompile Include="source2-sdk\math\math.cpp" />
     <ClCompile Include="utilities\vfunc.hpp" />
     <ClCompile Include="source2-sdk\schema_system\schema_system.cpp" />
@@ -115,18 +115,18 @@
     <ClCompile Include="utilities\renderer\renderer.cpp" />
     <ClCompile Include="utilities\shadow_vmt\shadow_vmt.cpp" />
     <ClCompile Include="utilities\utilities.cpp" />
-    <ClCompile Include="visuals\visuals.cpp" />
+    <ClCompile Include="features\visuals\visuals.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="combat\combat.hpp" />
-    <ClInclude Include="config\config.hpp" />
-    <ClInclude Include="config\binds.hpp" />
+    <ClInclude Include="features\combat\combat.hpp" />
+    <ClInclude Include="features\config\config.hpp" />
+    <ClInclude Include="features\config\binds.hpp" />
     <ClInclude Include="features\changer\changer.hpp" />
     <ClInclude Include="features\movement\movement.hpp" />
-    <ClInclude Include="features\prediction\prediction.hpp" />
+    <ClInclude Include="features\movement\prediction\prediction.hpp" />
     <ClInclude Include="hooks\hooks.hpp" />
-    <ClInclude Include="menu\menu.hpp" />
-    <ClInclude Include="misc\misc.hpp" />
+    <ClInclude Include="features\menu\menu.hpp" />
+    <ClInclude Include="features\misc\misc.hpp" />
     <ClInclude Include="signatures.hpp" />
     <ClInclude Include="source2-sdk\classes\entity.hpp" />
     <ClInclude Include="source2-sdk\classes\players.hpp" />
@@ -174,7 +174,7 @@
     <ClInclude Include="source2-sdk\interfaces\interfaces.hpp" />
     <ClInclude Include="utilities\utilities.hpp" />
     <ClInclude Include="utilities\shadow_vmt\shadow_vmt.hpp" />
-    <ClInclude Include="visuals\visuals.hpp" />
+    <ClInclude Include="features\visuals\visuals.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

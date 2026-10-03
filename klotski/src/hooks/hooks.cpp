@@ -6,14 +6,14 @@
 #include "../utilities/minhook/MinHook.h"
 #include "../utilities/utilities.hpp"
 #include "../source2-sdk/sdk.hpp"
-#include "../visuals/visuals.hpp"
-#include "../misc/misc.hpp"
-#include "../combat/combat.hpp"
+#include "../features/visuals/visuals.hpp"
+#include "../features/misc/misc.hpp"
+#include "../features/combat/combat.hpp"
 #include "../features/movement/movement.hpp"
-#include "../features/prediction/prediction.hpp"
-#include "../menu/menu.hpp"
-#include "../config/config.hpp"
-#include "../config/binds.hpp"
+#include "../features/movement/prediction/prediction.hpp"
+#include "../features/menu/menu.hpp"
+#include "../features/config/config.hpp"
+#include "../features/config/binds.hpp"
 #include "../source2-sdk/classes/viewsetup.hpp"
 
 #include "../utilities/imgui/imgui.h"
@@ -181,11 +181,6 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 			movement::run_bhop(user_cmd);
 		}
 
-		if (config::context.edgebug)
-		{
-			movement::edgebug(user_cmd);
-		}
-
 		if (config::context.pixelsurf)
 		{
 			movement::pixelsurf(user_cmd);
@@ -193,6 +188,11 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 
 		prediction::start(user_cmd);
 		{
+			if (config::context.standalone_rcs)
+			{
+				combat::run_rcs();
+			}
+
 			if (config::context.aimbot && sdk::local_controller)
 			{
 				combat::run_aimbot(sdk::local_controller);
@@ -249,6 +249,7 @@ HRESULT __fastcall hooks::swap_chain_present::hook(IDXGISwapChain* swap_chain, s
 
 		io.Fonts->AddFontDefault(&config);
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdanab.ttf", 16.f, &config);
+
 		ImGui_ImplDX11_CreateDeviceObjects();
 	}
 

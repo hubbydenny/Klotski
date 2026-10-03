@@ -133,6 +133,7 @@ public:
 class player_t : public cs_player_pawn_base_t
 {
 public:
+	SCHEMA("C_CSPlayerPawn", "m_pAimPunchServices", aim_punch_services, void*);
 	SCHEMA("C_CSPlayerPawn", "m_ArmorValue", armor_value, std::int32_t);
 	SCHEMA("C_CSPlayerPawn", "m_bGunGameImmunity", gun_immunity, bool);
 	SCHEMA("C_CSPlayerPawn", "m_angEyeAngles", eye_angles, vec3_t);
@@ -169,10 +170,17 @@ public:
 
 	vec3_t get_aim_punch()
 	{
-		cs_player_base_camera_services_t* services = this->camera_services();
+		if (!utilities::is_valid_pointer(aim_punch_services())) return vec3_t();
 
-		if (!utilities::is_valid_pointer(services)) return vec3_t();
-		return services->view_punch_angle();
+		using function_t = void(__fastcall*)(void*, vec3_t*, std::int32_t);
+		static function_t fn = reinterpret_cast<function_t>(utilities::scan_function(L"client.dll", C_CSPlayerPawn_GetAimPunch));
+
+		if (!fn) return vec3_t();
+
+		vec3_t punch{};
+		fn(aim_punch_services(), &punch, 0);
+
+		return punch;
 	}
 
 	bool has_defuser()

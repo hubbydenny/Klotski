@@ -1,0 +1,1409 @@
+{
+  "count": 205,
+  "modules": {
+    "animationsystem.dll": [
+      {
+        "deref": false,
+        "hpp_name": "AnimationSystem_001",
+        "kind": "interface",
+        "name": "AnimationSystem_001",
+        "rva": "0x8375F8"
+      },
+      {
+        "deref": false,
+        "hpp_name": "AnimationSystemUtils_001",
+        "kind": "interface",
+        "name": "AnimationSystemUtils_001",
+        "rva": "0x83F6D8"
+      },
+      {
+        "hpp_name": "pAnimationSystemUtils",
+        "kind": "signature",
+        "name": "pAnimationSystemUtils",
+        "rva": "0x83F6B8"
+      }
+    ],
+    "client.dll": [
+      {
+        "hpp_name": "CInputPtrGlobal",
+        "kind": "signature",
+        "name": "CInputPtrGlobal",
+        "rva": "0x2238320"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ClientBugBugServic001_Client",
+        "kind": "interface",
+        "name": "ClientBugBugServic001_Client",
+        "rva": "0x222F7E0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ClientToolsInfo_001",
+        "kind": "interface",
+        "name": "ClientToolsInfo_001",
+        "rva": "0x222F7B0"
+      },
+      {
+        "hpp_name": "CSGOInput",
+        "kind": "global",
+        "name": "dwCSGOInput",
+        "rva": "0x2576160"
+      },
+      {
+        "hpp_name": "EntityList",
+        "kind": "global",
+        "name": "dwEntityList",
+        "rva": "0x2715828"
+      },
+      {
+        "hpp_name": "GameEntitySystem",
+        "kind": "global",
+        "name": "dwGameEntitySystem",
+        "rva": "0x2715828"
+      },
+      {
+        "hpp_name": "GameEntitySystem_highestEntityIndex",
+        "kind": "global",
+        "name": "dwGameEntitySystem_highestEntityIndex",
+        "rva": "0x2120"
+      },
+      {
+        "hpp_name": "GameRules",
+        "kind": "global",
+        "name": "dwGameRules",
+        "rva": "0x255CE50"
+      },
+      {
+        "hpp_name": "GlobalVars",
+        "kind": "global",
+        "name": "dwGlobalVars",
+        "rva": "0x222BE98"
+      },
+      {
+        "hpp_name": "GlowManager",
+        "kind": "global",
+        "name": "dwGlowManager",
+        "rva": "0x255CE60"
+      },
+      {
+        "hpp_name": "LocalPlayerController",
+        "kind": "global",
+        "name": "dwLocalPlayerController",
+        "rva": "0x2538008"
+      },
+      {
+        "hpp_name": "LocalPlayerPawn",
+        "kind": "global",
+        "name": "dwLocalPlayerPawn",
+        "rva": "0x2560698"
+      },
+      {
+        "hpp_name": "PlantedC4",
+        "kind": "global",
+        "name": "dwPlantedC4",
+        "rva": "0x24C88D0"
+      },
+      {
+        "hpp_name": "Prediction",
+        "kind": "global",
+        "name": "dwPrediction",
+        "rva": "0x25605A0"
+      },
+      {
+        "hpp_name": "Sensitivity",
+        "kind": "global",
+        "name": "dwSensitivity",
+        "rva": "0x255D998"
+      },
+      {
+        "hpp_name": "Sensitivity_sensitivity",
+        "kind": "global",
+        "name": "dwSensitivity_sensitivity",
+        "rva": "0x58"
+      },
+      {
+        "hpp_name": "ViewAngles",
+        "kind": "global",
+        "name": "dwViewAngles",
+        "rva": "0x25767E8"
+      },
+      {
+        "hpp_name": "ViewMatrix",
+        "kind": "global",
+        "name": "dwViewMatrix",
+        "rva": "0x2566910"
+      },
+      {
+        "hpp_name": "ViewRender",
+        "kind": "global",
+        "name": "dwViewRender",
+        "rva": "0x2565D20"
+      },
+      {
+        "hpp_name": "WeaponC4",
+        "kind": "global",
+        "name": "dwWeaponC4",
+        "rva": "0x24C4A90"
+      },
+      {
+        "deref": false,
+        "hpp_name": "EmptyWorldService001_Client",
+        "kind": "interface",
+        "name": "EmptyWorldService001_Client",
+        "rva": "0x2213230"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameClientExports001",
+        "kind": "interface",
+        "name": "GameClientExports001",
+        "rva": "0x222C458"
+      },
+      {
+        "hpp_name": "GetAbsOrigin",
+        "kind": "signature",
+        "name": "GetAbsOrigin",
+        "rva": "0x2197E0"
+      },
+      {
+        "hpp_name": "GetBombsiteACenter",
+        "kind": "signature",
+        "name": "GetBombsiteACenter",
+        "rva": "0x8CCE70"
+      },
+      {
+        "hpp_name": "GetBombsiteBCenter",
+        "kind": "signature",
+        "name": "GetBombsiteBCenter",
+        "rva": "0x8CCED0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "LegacyGameUI001",
+        "kind": "interface",
+        "name": "LegacyGameUI001",
+        "rva": "0x223C0E0"
+      },
+      {
+        "hpp_name": "ManageGlowSceneObject",
+        "kind": "signature",
+        "name": "ManageGlowSceneObject",
+        "rva": "0xB77EB0"
+      },
+      {
+        "hpp_name": "pClientMode",
+        "kind": "signature",
+        "name": "pClientMode",
+        "rva": "0x2573EC0"
+      },
+      {
+        "hpp_name": "pCSGOInputInstance",
+        "kind": "signature",
+        "name": "pCSGOInputInstance",
+        "rva": "0x2576160"
+      },
+      {
+        "hpp_name": "pCSInventoryManager",
+        "kind": "signature",
+        "name": "pCSInventoryManager",
+        "rva": "0x24D3A60"
+      },
+      {
+        "hpp_name": "pCvar",
+        "kind": "signature",
+        "name": "pCvar",
+        "rva": "0x2797C58"
+      },
+      {
+        "hpp_name": "pDynamicLightManager",
+        "kind": "signature",
+        "name": "pDynamicLightManager",
+        "rva": "0x2555338"
+      },
+      {
+        "hpp_name": "pEconItemSystem",
+        "kind": "signature",
+        "name": "pEconItemSystem",
+        "rva": "0x25EF0C0"
+      },
+      {
+        "hpp_name": "pEntitySystem",
+        "kind": "signature",
+        "name": "pEntitySystem",
+        "rva": "0x23B67F0"
+      },
+      {
+        "hpp_name": "pGameEntitySystem",
+        "kind": "signature",
+        "name": "pGameEntitySystem",
+        "rva": "0x2715828"
+      },
+      {
+        "hpp_name": "pGameEventManager",
+        "kind": "signature",
+        "name": "pGameEventManager",
+        "rva": "0x25469B0"
+      },
+      {
+        "hpp_name": "pGameRules",
+        "kind": "signature",
+        "name": "pGameRules",
+        "rva": "0x255CE50"
+      },
+      {
+        "hpp_name": "pGameTraceManager",
+        "kind": "signature",
+        "name": "pGameTraceManager",
+        "rva": "0x2223148"
+      },
+      {
+        "hpp_name": "pGlobalVariables",
+        "kind": "signature",
+        "name": "pGlobalVariables",
+        "rva": "0x222BE98"
+      },
+      {
+        "hpp_name": "pGlowManager",
+        "kind": "signature",
+        "name": "pGlowManager",
+        "rva": "0x255CE60"
+      },
+      {
+        "hpp_name": "pHudPanel",
+        "kind": "signature",
+        "name": "pHudPanel",
+        "rva": "0x25D0F78"
+      },
+      {
+        "hpp_name": "pInterpolationPhase",
+        "kind": "signature",
+        "name": "pInterpolationPhase",
+        "rva": "0x21BB0A8"
+      },
+      {
+        "hpp_name": "pInventoryCategoryTree",
+        "kind": "signature",
+        "name": "pInventoryCategoryTree",
+        "rva": "0x25EDE30"
+      },
+      {
+        "hpp_name": "pLocalPlayerController",
+        "kind": "signature",
+        "name": "pLocalPlayerController",
+        "rva": "0x2538008"
+      },
+      {
+        "hpp_name": "pMainMenuPanel",
+        "kind": "signature",
+        "name": "pMainMenuPanel",
+        "rva": "0x25C4558"
+      },
+      {
+        "hpp_name": "pMatchFramework",
+        "kind": "signature",
+        "name": "pMatchFramework",
+        "rva": "0x2797D70"
+      },
+      {
+        "hpp_name": "pMatchmakingReservation",
+        "kind": "signature",
+        "name": "pMatchmakingReservation",
+        "rva": "0x25774D8"
+      },
+      {
+        "hpp_name": "pMaterialManager",
+        "kind": "signature",
+        "name": "pMaterialManager",
+        "rva": "0x2797EB0"
+      },
+      {
+        "hpp_name": "pParticleManager",
+        "kind": "signature",
+        "name": "pParticleManager",
+        "rva": "0x22232F8"
+      },
+      {
+        "hpp_name": "pPlantedC4s",
+        "kind": "signature",
+        "name": "pPlantedC4s",
+        "rva": "0x24C88D0"
+      },
+      {
+        "hpp_name": "pPrediction",
+        "kind": "signature",
+        "name": "pPrediction",
+        "rva": "0x25605A0"
+      },
+      {
+        "hpp_name": "pPredictionPlayer",
+        "kind": "signature",
+        "name": "pPredictionPlayer",
+        "rva": "0x2551A68"
+      },
+      {
+        "hpp_name": "pPredictionRandomSeed",
+        "kind": "signature",
+        "name": "pPredictionRandomSeed",
+        "rva": "0x21BF2B0"
+      },
+      {
+        "hpp_name": "pRenderGameSystem",
+        "kind": "signature",
+        "name": "pRenderGameSystem",
+        "rva": "0x23B8358"
+      },
+      {
+        "hpp_name": "pSensitivity",
+        "kind": "signature",
+        "name": "pSensitivity",
+        "rva": "0x255D998"
+      },
+      {
+        "hpp_name": "pUiEngine",
+        "kind": "signature",
+        "name": "pUiEngine",
+        "rva": "0x272EE60"
+      },
+      {
+        "hpp_name": "pUIInventory",
+        "kind": "signature",
+        "name": "pUIInventory",
+        "rva": "0x2526588"
+      },
+      {
+        "hpp_name": "pViewRender",
+        "kind": "signature",
+        "name": "pViewRender",
+        "rva": "0x2565D20"
+      },
+      {
+        "hpp_name": "pViewToProjectionMatrix",
+        "kind": "signature",
+        "name": "pViewToProjectionMatrix",
+        "rva": "0x25668D0"
+      },
+      {
+        "hpp_name": "pWeaponC4",
+        "kind": "signature",
+        "name": "pWeaponC4",
+        "rva": "0x24C4A90"
+      },
+      {
+        "hpp_name": "pWeaponRecoilTable",
+        "kind": "signature",
+        "name": "pWeaponRecoilTable",
+        "rva": "0x2215728"
+      },
+      {
+        "hpp_name": "pWorldToProjectionMatrix",
+        "kind": "signature",
+        "name": "pWorldToProjectionMatrix",
+        "rva": "0x2566910"
+      },
+      {
+        "hpp_name": "SetItemItemIdFunction",
+        "kind": "signature",
+        "name": "SetItemItemIdFunction",
+        "rva": "0xE5AA30"
+      },
+      {
+        "hpp_name": "SetSceneObjectAttributeFloat4",
+        "kind": "signature",
+        "name": "SetSceneObjectAttributeFloat4",
+        "rva": "0x16AB80"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2Client002",
+        "kind": "interface",
+        "name": "Source2Client002",
+        "rva": "0x255A3A0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2ClientConfig001",
+        "kind": "interface",
+        "name": "Source2ClientConfig001",
+        "rva": "0x24B7240"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2ClientPrediction001",
+        "kind": "interface",
+        "name": "Source2ClientPrediction001",
+        "rva": "0x25605A0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2ClientUI001",
+        "kind": "interface",
+        "name": "Source2ClientUI001",
+        "rva": "0x223A960"
+      },
+      {
+        "hpp_name": "TransformScale3dVMT",
+        "kind": "signature",
+        "name": "TransformScale3dVMT",
+        "rva": "0x1CBAE00"
+      },
+      {
+        "hpp_name": "TransformTranslate3dVMT",
+        "kind": "signature",
+        "name": "TransformTranslate3dVMT",
+        "rva": "0x1CBADC0"
+      }
+    ],
+    "engine2.dll": [
+      {
+        "deref": false,
+        "hpp_name": "BenchmarkService001",
+        "kind": "interface",
+        "name": "BenchmarkService001",
+        "rva": "0x622C80"
+      },
+      {
+        "deref": false,
+        "hpp_name": "BugBugService001",
+        "kind": "interface",
+        "name": "BugBugService001",
+        "rva": "0x622D80"
+      },
+      {
+        "deref": false,
+        "hpp_name": "BugService001",
+        "kind": "interface",
+        "name": "BugService001",
+        "rva": "0x8DB7F0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ClientServerEngineLoopService_001",
+        "kind": "interface",
+        "name": "ClientServerEngineLoopService_001",
+        "rva": "0x91CE30"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ClientServerSharedHandleSystem001",
+        "kind": "interface",
+        "name": "ClientServerSharedHandleSystem001",
+        "rva": "0x91C440"
+      },
+      {
+        "hpp_name": "BuildNumber",
+        "kind": "global",
+        "name": "dwBuildNumber",
+        "rva": "0x61CFE8"
+      },
+      {
+        "hpp_name": "NetworkGameClient",
+        "kind": "global",
+        "name": "dwNetworkGameClient",
+        "rva": "0x91AFC0"
+      },
+      {
+        "hpp_name": "NetworkGameClient_clientTickCount",
+        "kind": "global",
+        "name": "dwNetworkGameClient_clientTickCount",
+        "rva": "0x398"
+      },
+      {
+        "hpp_name": "NetworkGameClient_deltaTick",
+        "kind": "global",
+        "name": "dwNetworkGameClient_deltaTick",
+        "rva": "0x24C"
+      },
+      {
+        "hpp_name": "NetworkGameClient_isBackgroundMap",
+        "kind": "global",
+        "name": "dwNetworkGameClient_isBackgroundMap",
+        "rva": "0x2C143F"
+      },
+      {
+        "hpp_name": "NetworkGameClient_localPlayer",
+        "kind": "global",
+        "name": "dwNetworkGameClient_localPlayer",
+        "rva": "0xF8"
+      },
+      {
+        "hpp_name": "NetworkGameClient_maxClients",
+        "kind": "global",
+        "name": "dwNetworkGameClient_maxClients",
+        "rva": "0x240"
+      },
+      {
+        "hpp_name": "NetworkGameClient_serverTickCount",
+        "kind": "global",
+        "name": "dwNetworkGameClient_serverTickCount",
+        "rva": "0x24C"
+      },
+      {
+        "hpp_name": "NetworkGameClient_signOnState",
+        "kind": "global",
+        "name": "dwNetworkGameClient_signOnState",
+        "rva": "0x230"
+      },
+      {
+        "hpp_name": "WindowHeight",
+        "kind": "global",
+        "name": "dwWindowHeight",
+        "rva": "0x91F334"
+      },
+      {
+        "hpp_name": "WindowWidth",
+        "kind": "global",
+        "name": "dwWindowWidth",
+        "rva": "0x91F330"
+      },
+      {
+        "deref": false,
+        "hpp_name": "EngineGameUI001",
+        "kind": "interface",
+        "name": "EngineGameUI001",
+        "rva": "0x6206E0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "EngineServiceMgr001",
+        "kind": "interface",
+        "name": "EngineServiceMgr001",
+        "rva": "0x91C700"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameEventSystemClientV001",
+        "kind": "interface",
+        "name": "GameEventSystemClientV001",
+        "rva": "0x91C9E0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameEventSystemServerV001",
+        "kind": "interface",
+        "name": "GameEventSystemServerV001",
+        "rva": "0x91CB10"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameResourceServiceClientV001",
+        "kind": "interface",
+        "name": "GameResourceServiceClientV001",
+        "rva": "0x622DC0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameResourceServiceServerV001",
+        "kind": "interface",
+        "name": "GameResourceServiceServerV001",
+        "rva": "0x622E20"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameUIService_001",
+        "kind": "interface",
+        "name": "GameUIService_001",
+        "rva": "0x8DBC40"
+      },
+      {
+        "deref": false,
+        "hpp_name": "HostStateMgr001",
+        "kind": "interface",
+        "name": "HostStateMgr001",
+        "rva": "0x623540"
+      },
+      {
+        "deref": false,
+        "hpp_name": "INETSUPPORT_001",
+        "kind": "interface",
+        "name": "INETSUPPORT_001",
+        "rva": "0x61BC30"
+      },
+      {
+        "deref": false,
+        "hpp_name": "InputService_001",
+        "kind": "interface",
+        "name": "InputService_001",
+        "rva": "0x8DBF20"
+      },
+      {
+        "deref": false,
+        "hpp_name": "KeyValueCache001",
+        "kind": "interface",
+        "name": "KeyValueCache001",
+        "rva": "0x6235F0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "MapListService_001",
+        "kind": "interface",
+        "name": "MapListService_001",
+        "rva": "0x91AD90"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NetworkClientService_001",
+        "kind": "interface",
+        "name": "NetworkClientService_001",
+        "rva": "0x91AF20"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NetworkP2PService_001",
+        "kind": "interface",
+        "name": "NetworkP2PService_001",
+        "rva": "0x91B260"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NetworkServerService_001",
+        "kind": "interface",
+        "name": "NetworkServerService_001",
+        "rva": "0x91B410"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NetworkService_001",
+        "kind": "interface",
+        "name": "NetworkService_001",
+        "rva": "0x622F90"
+      },
+      {
+        "hpp_name": "pBuildNumber",
+        "kind": "signature",
+        "name": "pBuildNumber",
+        "rva": "0x61CFE8"
+      },
+      {
+        "hpp_name": "pFrameInputRing",
+        "kind": "signature",
+        "name": "pFrameInputRing",
+        "rva": "0x91D000"
+      },
+      {
+        "hpp_name": "pFrameInputRingIndex",
+        "kind": "signature",
+        "name": "pFrameInputRingIndex",
+        "rva": "0x91CCEC"
+      },
+      {
+        "hpp_name": "pNetworkGameClient",
+        "kind": "signature",
+        "name": "pNetworkGameClient",
+        "rva": "0x91AFC0"
+      },
+      {
+        "hpp_name": "pPVSManager",
+        "kind": "signature",
+        "name": "pPVSManager",
+        "rva": "0x6236A0"
+      },
+      {
+        "hpp_name": "pWindowHeight",
+        "kind": "signature",
+        "name": "pWindowHeight",
+        "rva": "0x91F334"
+      },
+      {
+        "hpp_name": "pWindowWidth",
+        "kind": "signature",
+        "name": "pWindowWidth",
+        "rva": "0x91F330"
+      },
+      {
+        "deref": false,
+        "hpp_name": "RenderService_001",
+        "kind": "interface",
+        "name": "RenderService_001",
+        "rva": "0x91B680"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ScreenshotService001",
+        "kind": "interface",
+        "name": "ScreenshotService001",
+        "rva": "0x91B940"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SimpleEngineLoopService_001",
+        "kind": "interface",
+        "name": "SimpleEngineLoopService_001",
+        "rva": "0x623650"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SoundService_001",
+        "kind": "interface",
+        "name": "SoundService_001",
+        "rva": "0x622FD0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2EngineToClient001",
+        "kind": "interface",
+        "name": "Source2EngineToClient001",
+        "rva": "0x61FFF0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2EngineToClientStringTable001",
+        "kind": "interface",
+        "name": "Source2EngineToClientStringTable001",
+        "rva": "0x620050"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2EngineToServer001",
+        "kind": "interface",
+        "name": "Source2EngineToServer001",
+        "rva": "0x6200C8"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2EngineToServerStringTable001",
+        "kind": "interface",
+        "name": "Source2EngineToServerStringTable001",
+        "rva": "0x6200F0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SplitScreenService_001",
+        "kind": "interface",
+        "name": "SplitScreenService_001",
+        "rva": "0x6232B0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "StatsService_001",
+        "kind": "interface",
+        "name": "StatsService_001",
+        "rva": "0x91BC80"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ToolService_001",
+        "kind": "interface",
+        "name": "ToolService_001",
+        "rva": "0x6233B0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VENGINE_GAMEUIFUNCS_VERSION005",
+        "kind": "interface",
+        "name": "VENGINE_GAMEUIFUNCS_VERSION005",
+        "rva": "0x620770"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VProfService_001",
+        "kind": "interface",
+        "name": "VProfService_001",
+        "rva": "0x6233F0"
+      }
+    ],
+    "filesystem_stdio.dll": [
+      {
+        "deref": false,
+        "hpp_name": "VAsyncFileSystem2_001",
+        "kind": "interface",
+        "name": "VAsyncFileSystem2_001",
+        "rva": "0x214610"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VFileSystem017",
+        "kind": "interface",
+        "name": "VFileSystem017",
+        "rva": "0x2143D0"
+      }
+    ],
+    "host.dll": [
+      {
+        "deref": false,
+        "hpp_name": "DebugDrawQueueManager001",
+        "kind": "interface",
+        "name": "DebugDrawQueueManager001",
+        "rva": "0x13FF70"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameModelInfo001",
+        "kind": "interface",
+        "name": "GameModelInfo001",
+        "rva": "0x13FFB0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameSystem2HostHook",
+        "kind": "interface",
+        "name": "GameSystem2HostHook",
+        "rva": "0x13FFF0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "HostUtils001",
+        "kind": "interface",
+        "name": "HostUtils001",
+        "rva": "0x14F900"
+      },
+      {
+        "deref": false,
+        "hpp_name": "PredictionDiffManager001",
+        "kind": "interface",
+        "name": "PredictionDiffManager001",
+        "rva": "0x140100"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SaveRestoreDataVersion001",
+        "kind": "interface",
+        "name": "SaveRestoreDataVersion001",
+        "rva": "0x140230"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SinglePlayerSharedMemory001",
+        "kind": "interface",
+        "name": "SinglePlayerSharedMemory001",
+        "rva": "0x140260"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2Host001",
+        "kind": "interface",
+        "name": "Source2Host001",
+        "rva": "0x1402D0"
+      }
+    ],
+    "imemanager.dll": [
+      {
+        "deref": false,
+        "hpp_name": "IMEManager001",
+        "kind": "interface",
+        "name": "IMEManager001",
+        "rva": "0x37AA0"
+      }
+    ],
+    "inputsystem.dll": [
+      {
+        "hpp_name": "InputSystem",
+        "kind": "global",
+        "name": "dwInputSystem",
+        "rva": "0x46BC0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "InputStackSystemVersion001",
+        "kind": "interface",
+        "name": "InputStackSystemVersion001",
+        "rva": "0x44E90"
+      },
+      {
+        "deref": false,
+        "hpp_name": "InputSystemVersion001",
+        "kind": "interface",
+        "name": "InputSystemVersion001",
+        "rva": "0x46BC0"
+      },
+      {
+        "hpp_name": "pInputSystemSvc",
+        "kind": "signature",
+        "name": "pInputSystemSvc",
+        "rva": "0x46BC0"
+      }
+    ],
+    "localize.dll": [
+      {
+        "deref": false,
+        "hpp_name": "Localize_001",
+        "kind": "interface",
+        "name": "Localize_001",
+        "rva": "0x59120"
+      }
+    ],
+    "matchmaking.dll": [
+      {
+        "hpp_name": "GameTypes",
+        "kind": "global",
+        "name": "dwGameTypes",
+        "rva": "0x1B0FD0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "GameTypes001",
+        "kind": "interface",
+        "name": "GameTypes001",
+        "rva": "0x1B0FD0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "MATCHFRAMEWORK_001",
+        "kind": "interface",
+        "name": "MATCHFRAMEWORK_001",
+        "rva": "0x1B90A0"
+      }
+    ],
+    "materialsystem2.dll": [
+      {
+        "deref": false,
+        "hpp_name": "FontManager_001",
+        "kind": "interface",
+        "name": "FontManager_001",
+        "rva": "0x1638E0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "MaterialUtils_001",
+        "kind": "interface",
+        "name": "MaterialUtils_001",
+        "rva": "0x14BD30"
+      },
+      {
+        "deref": false,
+        "hpp_name": "PostProcessingSystem_001",
+        "kind": "interface",
+        "name": "PostProcessingSystem_001",
+        "rva": "0x14BC60"
+      },
+      {
+        "deref": false,
+        "hpp_name": "TextLayout_001",
+        "kind": "interface",
+        "name": "TextLayout_001",
+        "rva": "0x14BCC0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VMaterialSystem2_001",
+        "kind": "interface",
+        "name": "VMaterialSystem2_001",
+        "rva": "0x163530"
+      }
+    ],
+    "meshsystem.dll": [
+      {
+        "deref": false,
+        "hpp_name": "MeshSystem001",
+        "kind": "interface",
+        "name": "MeshSystem001",
+        "rva": "0x180AB0"
+      }
+    ],
+    "navsystem.dll": [
+      {
+        "deref": false,
+        "hpp_name": "NavSystem001",
+        "kind": "interface",
+        "name": "NavSystem001",
+        "rva": "0x12C000"
+      }
+    ],
+    "networksystem.dll": [
+      {
+        "deref": false,
+        "hpp_name": "FlattenedSerializersVersion001",
+        "kind": "interface",
+        "name": "FlattenedSerializersVersion001",
+        "rva": "0x277A50"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NetworkMessagesVersion001",
+        "kind": "interface",
+        "name": "NetworkMessagesVersion001",
+        "rva": "0x2A3F10"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NetworkSystemVersion001",
+        "kind": "interface",
+        "name": "NetworkSystemVersion001",
+        "rva": "0x2911A0"
+      },
+      {
+        "hpp_name": "pNetworkSystem",
+        "kind": "signature",
+        "name": "pNetworkSystem",
+        "rva": "0x2911A0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SerializedEntitiesVersion001",
+        "kind": "interface",
+        "name": "SerializedEntitiesVersion001",
+        "rva": "0x291290"
+      }
+    ],
+    "panorama.dll": [
+      {
+        "deref": false,
+        "hpp_name": "PanoramaUIEngine001",
+        "kind": "interface",
+        "name": "PanoramaUIEngine001",
+        "rva": "0x586F60"
+      }
+    ],
+    "panorama_text_pango.dll": [
+      {
+        "deref": false,
+        "hpp_name": "PanoramaTextServices001",
+        "kind": "interface",
+        "name": "PanoramaTextServices001",
+        "rva": "0x2BA9D0"
+      }
+    ],
+    "panoramauiclient.dll": [
+      {
+        "deref": false,
+        "hpp_name": "PanoramaUIClient001",
+        "kind": "interface",
+        "name": "PanoramaUIClient001",
+        "rva": "0x26F090"
+      }
+    ],
+    "particles.dll": [
+      {
+        "hpp_name": "GetParticleManager",
+        "kind": "signature",
+        "name": "GetParticleManager",
+        "rva": "0x5FD890"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ParticleSystemMgr003",
+        "kind": "interface",
+        "name": "ParticleSystemMgr003",
+        "rva": "0x65AEB0"
+      }
+    ],
+    "pulse_system.dll": [
+      {
+        "deref": false,
+        "hpp_name": "IPulseSystem_001",
+        "kind": "interface",
+        "name": "IPulseSystem_001",
+        "rva": "0x238120"
+      }
+    ],
+    "rendersystemdx11.dll": [
+      {
+        "deref": false,
+        "hpp_name": "RenderDeviceMgr001",
+        "kind": "interface",
+        "name": "RenderDeviceMgr001",
+        "rva": "0x4342F0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "RenderUtils_001",
+        "kind": "interface",
+        "name": "RenderUtils_001",
+        "rva": "0x434BD0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VRenderDeviceMgrBackdoor001",
+        "kind": "interface",
+        "name": "VRenderDeviceMgrBackdoor001",
+        "rva": "0x434390"
+      }
+    ],
+    "resourcesystem.dll": [
+      {
+        "deref": false,
+        "hpp_name": "ResourceSystem013",
+        "kind": "interface",
+        "name": "ResourceSystem013",
+        "rva": "0x892B0"
+      }
+    ],
+    "scenefilecache.dll": [
+      {
+        "deref": false,
+        "hpp_name": "ResponseRulesCache001",
+        "kind": "interface",
+        "name": "ResponseRulesCache001",
+        "rva": "0x11D350"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SceneFileCache002",
+        "kind": "interface",
+        "name": "SceneFileCache002",
+        "rva": "0x11D478"
+      }
+    ],
+    "scenesystem.dll": [
+      {
+        "hpp_name": "pSceneLightDataQueue",
+        "kind": "signature",
+        "name": "pSceneLightDataQueue",
+        "rva": "0x921A28"
+      },
+      {
+        "hpp_name": "pSceneSystem",
+        "kind": "signature",
+        "name": "pSceneSystem",
+        "rva": "0x91FB20"
+      },
+      {
+        "deref": false,
+        "hpp_name": "RenderingPipelines_001",
+        "kind": "interface",
+        "name": "RenderingPipelines_001",
+        "rva": "0x675A00"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SceneSystem_002",
+        "kind": "interface",
+        "name": "SceneSystem_002",
+        "rva": "0x91FB20"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SceneUtils_001",
+        "kind": "interface",
+        "name": "SceneUtils_001",
+        "rva": "0x676760"
+      }
+    ],
+    "schemasystem.dll": [
+      {
+        "hpp_name": "pSchemaSystem",
+        "kind": "signature",
+        "name": "pSchemaSystem",
+        "rva": "0x76710"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SchemaSystem_001",
+        "kind": "interface",
+        "name": "SchemaSystem_001",
+        "rva": "0x76710"
+      }
+    ],
+    "server.dll": [
+      {
+        "deref": false,
+        "hpp_name": "customnavsystem001",
+        "kind": "interface",
+        "name": "customnavsystem001",
+        "rva": "0x1DA64F0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "EmptyWorldService001_Server",
+        "kind": "interface",
+        "name": "EmptyWorldService001_Server",
+        "rva": "0x1E09100"
+      },
+      {
+        "deref": false,
+        "hpp_name": "EntitySubclassUtilsV001",
+        "kind": "interface",
+        "name": "EntitySubclassUtilsV001",
+        "rva": "0x1DB8BC0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "NavGameTest001",
+        "kind": "interface",
+        "name": "NavGameTest001",
+        "rva": "0x1E50DC8"
+      },
+      {
+        "deref": false,
+        "hpp_name": "ServerToolsInfo_001",
+        "kind": "interface",
+        "name": "ServerToolsInfo_001",
+        "rva": "0x1E2FCB8"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2GameClients001",
+        "kind": "interface",
+        "name": "Source2GameClients001",
+        "rva": "0x1E2F1E0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2GameDirector001",
+        "kind": "interface",
+        "name": "Source2GameDirector001",
+        "rva": "0x1F99740"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2GameEntities001",
+        "kind": "interface",
+        "name": "Source2GameEntities001",
+        "rva": "0x1E2F460"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2Server001",
+        "kind": "interface",
+        "name": "Source2Server001",
+        "rva": "0x1E2F2A0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "Source2ServerConfig001",
+        "kind": "interface",
+        "name": "Source2ServerConfig001",
+        "rva": "0x2114CA8"
+      }
+    ],
+    "soundsystem.dll": [
+      {
+        "hpp_name": "SoundSystem",
+        "kind": "global",
+        "name": "dwSoundSystem",
+        "rva": "0x535350"
+      },
+      {
+        "hpp_name": "SoundSystem_engineViewData",
+        "kind": "global",
+        "name": "dwSoundSystem_engineViewData",
+        "rva": "0x6C"
+      },
+      {
+        "hpp_name": "pSoundChannels",
+        "kind": "signature",
+        "name": "pSoundChannels",
+        "rva": "0x657C68"
+      },
+      {
+        "hpp_name": "pSoundSystem",
+        "kind": "signature",
+        "name": "pSoundSystem",
+        "rva": "0x535350"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SoundBugBugService001_Client",
+        "kind": "interface",
+        "name": "SoundBugBugService001_Client",
+        "rva": "0x535BB0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SoundOpSystem001",
+        "kind": "interface",
+        "name": "SoundOpSystem001",
+        "rva": "0x535A90"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SoundOpSystemEdit001",
+        "kind": "interface",
+        "name": "SoundOpSystemEdit001",
+        "rva": "0x5359A0"
+      },
+      {
+        "deref": false,
+        "hpp_name": "SoundSystem001",
+        "kind": "interface",
+        "name": "SoundSystem001",
+        "rva": "0x535350"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VMixEditTool001",
+        "kind": "interface",
+        "name": "VMixEditTool001",
+        "rva": "0x5943D7F"
+      }
+    ],
+    "steamaudio.dll": [
+      {
+        "deref": false,
+        "hpp_name": "SteamAudio001",
+        "kind": "interface",
+        "name": "SteamAudio001",
+        "rva": "0x35C1A0"
+      }
+    ],
+    "tier0.dll": [
+      {
+        "hpp_name": "pCVar",
+        "kind": "signature",
+        "name": "pCVar",
+        "rva": "0x3AC670"
+      },
+      {
+        "hpp_name": "pCvarRegistry",
+        "kind": "signature",
+        "name": "pCvarRegistry",
+        "rva": "0x3A9568"
+      },
+      {
+        "deref": false,
+        "hpp_name": "TestScriptMgr001",
+        "kind": "interface",
+        "name": "TestScriptMgr001",
+        "rva": "0x3A1960"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VEngineCvar007",
+        "kind": "interface",
+        "name": "VEngineCvar007",
+        "rva": "0x3AC670"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VProcessUtils002",
+        "kind": "interface",
+        "name": "VProcessUtils002",
+        "rva": "0x3A1820"
+      },
+      {
+        "deref": false,
+        "hpp_name": "VStringTokenSystem001",
+        "kind": "interface",
+        "name": "VStringTokenSystem001",
+        "rva": "0x3D3300"
+      }
+    ],
+    "v8system.dll": [
+      {
+        "deref": false,
+        "hpp_name": "Source2V8System001",
+        "kind": "interface",
+        "name": "Source2V8System001",
+        "rva": "0x34790"
+      }
+    ],
+    "vphysics2.dll": [
+      {
+        "deref": false,
+        "hpp_name": "VPhysics2_Interface_001",
+        "kind": "interface",
+        "name": "VPhysics2_Interface_001",
+        "rva": "0x460E60"
+      }
+    ],
+    "vscript.dll": [
+      {
+        "deref": false,
+        "hpp_name": "VScriptManager010",
+        "kind": "interface",
+        "name": "VScriptManager010",
+        "rva": "0x13E430"
+      }
+    ],
+    "worldrenderer.dll": [
+      {
+        "deref": false,
+        "hpp_name": "WorldRendererMgr001",
+        "kind": "interface",
+        "name": "WorldRendererMgr001",
+        "rva": "0x236D00"
+      }
+    ]
+  },
+  "note": "Every resolved global: a2x dwXxx globals (kind=global), rip-relative signature globals (kind=signature) and registered interface instances (kind=interface). RVAs are module-relative; deref=true means the RVA holds a pointer to the object."
+}

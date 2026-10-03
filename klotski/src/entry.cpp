@@ -5,7 +5,7 @@
 #include "source2-sdk/schema_system/schema_system.hpp"
 #include "utilities/debug_console/debug.hpp"
 #include "hooks/hooks.hpp"
-#include "menu/menu.hpp"
+#include "features/menu/menu.hpp"
 
 
 DWORD WINAPI initialize(void* instance)

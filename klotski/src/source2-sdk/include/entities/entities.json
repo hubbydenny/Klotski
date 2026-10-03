@@ -1,0 +1,146 @@
+{
+  "build_number": 14188,
+  "by_class": [
+    {
+      "classname": "vote_controller",
+      "count": 3
+    },
+    {
+      "classname": "c_cs_observer_for_precache",
+      "count": 1
+    },
+    {
+      "classname": "c_cs_player_for_precache",
+      "count": 1
+    },
+    {
+      "classname": "cs_gamerules",
+      "count": 1
+    },
+    {
+      "classname": "cs_player_controller",
+      "count": 1
+    },
+    {
+      "classname": "cs_player_manager",
+      "count": 1
+    },
+    {
+      "classname": "worldent",
+      "count": 1
+    }
+  ],
+  "class_count": 7,
+  "entities": [
+    {
+      "classname": "worldent",
+      "health": 0,
+      "index": 0,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "cs_player_controller",
+      "health": 0,
+      "index": 1,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "cs_player_manager",
+      "health": 0,
+      "index": 6,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "cs_gamerules",
+      "health": 0,
+      "index": 7,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "vote_controller",
+      "health": 0,
+      "index": 8,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "vote_controller",
+      "health": 0,
+      "index": 9,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "vote_controller",
+      "health": 0,
+      "index": 10,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "c_cs_player_for_precache",
+      "health": 100,
+      "index": 11,
+      "max_health": 100,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    },
+    {
+      "classname": "c_cs_observer_for_precache",
+      "health": 0,
+      "index": 12,
+      "max_health": 0,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "team": 0
+    }
+  ],
+  "entity_count": 9,
+  "note": "Live snapshot of the CGameEntitySystem at dump time."
+}

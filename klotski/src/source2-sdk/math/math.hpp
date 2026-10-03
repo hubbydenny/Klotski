@@ -73,5 +73,6 @@ namespace math
 	vec3_t calculate_angle(const vec3_t& source, const vec3_t& destination, const vec3_t& view_angles);
 	float angle_distance(const vec3_t& source, const vec3_t& destination, const vec3_t& view_angles);
 }
+float normalize_angle(float angle);
 float normalize_yaw(float yaw);
 float vel2d(const vec3_t & velocity);

@@ -78,7 +78,7 @@
     <ClCompile Include="utilities\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="visuals\visuals.cpp">
+    <ClCompile Include="features\visuals\visuals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="features\movement\movement.cpp">
@@ -87,23 +87,29 @@
     <ClCompile Include="utilities\renderer\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="menu\menu.cpp">
+    <ClCompile Include="features\menu\menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="misc\misc.cpp">
+    <ClCompile Include="features\misc\misc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="config\config.cpp">
+    <ClCompile Include="features\config\config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source2-sdk\sdl\sdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="combat\combat.cpp">
+    <ClCompile Include="features\combat\combat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="features\changer\changer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="features\movement\prediction\prediction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\vfunc.hpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +218,7 @@
     <ClInclude Include="utilities\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="visuals\visuals.hpp">
+    <ClInclude Include="features\visuals\visuals.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="features\movement\movement.hpp">
@@ -239,16 +245,16 @@
     <ClInclude Include="source2-sdk\classes\user_cmd.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="menu\menu.hpp">
+    <ClInclude Include="features\menu\menu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="misc\misc.hpp">
+    <ClInclude Include="features\misc\misc.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="signatures.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="config\config.hpp">
+    <ClInclude Include="features\config\config.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\interfaces\i_input_system.hpp">
@@ -257,16 +263,25 @@
     <ClInclude Include="source2-sdk\sdl\sdl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="combat\combat.hpp">
+    <ClInclude Include="features\combat\combat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="config\binds.hpp">
+    <ClInclude Include="features\config\binds.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="features\changer\changer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\interfaces\visible.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="features\movement\prediction\prediction.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\inetclient.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\cprediction.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
