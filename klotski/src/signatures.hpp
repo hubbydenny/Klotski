@@ -1,5 +1,5 @@
 #pragma once
-
+#include <cstddef> // only for std::size_t | std::uintptr_t
 // checkout cs2-sdk.com 
 
 #define FRAME_STAGE_NOTIFY "48 89 5C 24 ? 48 89 6C 24 ? 57 48 83 EC ? 48 8B F9 33 ED"
@@ -8,6 +8,7 @@
 #define RESIZE_BUFFERS_PATTERN "40 53 55 56 57 41 54 41 56 41 57 48 83 EC ? 44 8B E2"
 #define MOUSE_INPUT_PATTERN "40 53 48 83 EC 20 80 B9 ? ? ? ? ? 48 8B D9 75 78"
 #define DRAW_GLOW_PATTERN "40 53 48 83 EC 20 48 8B 54"
+
 
 #define ENTITY_LIST "48 8B 0D ? ? ? ? 8B D3 E8 ? ? ? ? 48 8B F0"
 #define GET_BASE_ENTITY "4C 8D 49 10 81 FA ? ? 00 00 77 ? 8B CA C1 F9 09"
@@ -53,3 +54,19 @@
 #define GET_VDATA "48 81 EC ? ? ? ? 48 85 C9 75 ? 33 C0 48 81 C4 ? ? ? ? C3"
 
 #define GEN_PRIMITIVES "48 8B C4 48 89 58 08 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 81 EC"
+#define SKYBOXPAT "45 85 C9 0F 8E ? ? ? ? 4C 8B DC"
+
+//scalaformula
+namespace patterns
+{
+    inline constexpr const char* kRunScript = "4C 89 4C 24 ?? 4C 89 44 24 ?? 48 89 54 24 ?? 55 53 56 57 41 54 41 56 41 57 48 8D 6C 24";
+    inline constexpr const char* kRunFrame = "48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 54 41 56 41 57 48 81 EC 80 00 00 00 45 33 F6";
+
+    inline constexpr std::size_t kRunFrameIndex = 5;
+    inline constexpr std::size_t kRunScriptIndex = 77;
+    inline constexpr std::size_t kMaxVTableSlots = 512;
+
+    inline constexpr int kEngineGlobalOffset = 3;
+    inline constexpr const char* kEngineGlobals[]{"4C 89 35 ?? ?? ?? ?? 48 8B 01", "4C 89 3D ?? ?? ?? ?? 41 8B F7", "48 8B 05 ?? ?? ?? ?? 48 8B 80 F8 0B 00 00 C3", };
+    inline constexpr const char* kImageUrl = "40 53 57 41 56 48 81 EC 40 04 00 00";
+}

@@ -31,18 +31,16 @@ static void velocityind()
 
 	const float text_width = ImGui::CalcTextSize(buffer).x;
 
-	renderer::text(center - text_width / 2.f - 4.f, config::context.velo_y, config::context.velo_size, color_t::white(), buffer);
+	renderer::text(center - text_width / 2.f - 5.5f, config::context.velo_y, config::context.velo_size, color_t::white(), buffer);
 }
 static void keystrokes() {
 	bool w = (ImGui::IsKeyPressed(ImGuiKey_W, false));
 	bool s = (ImGui::IsKeyPressed(ImGuiKey_S, false));
 	bool a = (ImGui::IsKeyPressed(ImGuiKey_A, false));
-	bool d = (ImGui::IsKeyPressed(ImGuiKey_D, false));if (w) {
-renderer::text(500, 500, 16.f, color_t::white(), "W");
-}
-	if (s) {
-		renderer::text(500, 520, 16.f, color_t::white(), "S");
-	}
+	bool d = (ImGui::IsKeyPressed(ImGuiKey_D, false));
+
+	if (w) renderer::text(500, 500, 16.f, color_t::white(), "W");
+	if (s) renderer::text(500, 520, 16.f, color_t::white(), "S");
 }
 void misc::run()
 {

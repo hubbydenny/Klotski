@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -70,6 +70,8 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <ForceSynchronizedPDBWrites>true</ForceSynchronizedPDBWrites>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -85,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="features\combat\combat.cpp" />
+    <ClCompile Include="features\hud\hud.cpp" />
     <ClCompile Include="features\config\config.cpp" />
     <ClCompile Include="features\changer\changer.cpp" />
     <ClCompile Include="features\movement\movement.cpp" />
@@ -122,6 +125,9 @@
     <ClInclude Include="features\config\config.hpp" />
     <ClInclude Include="features\config\binds.hpp" />
     <ClInclude Include="features\changer\changer.hpp" />
+    <ClInclude Include="features\hud\hud.hpp" />
+    <ClInclude Include="features\hud\hud_assets.hpp" />
+    <ClInclude Include="features\hud\hud_scripts.hpp" />
     <ClInclude Include="features\movement\movement.hpp" />
     <ClInclude Include="features\movement\prediction\prediction.hpp" />
     <ClInclude Include="hooks\hooks.hpp" />

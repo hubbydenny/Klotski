@@ -6,6 +6,7 @@
 #include "utilities/debug_console/debug.hpp"
 #include "hooks/hooks.hpp"
 #include "features/menu/menu.hpp"
+#include "features/hud/hud.hpp"
 
 
 DWORD WINAPI initialize(void* instance)
@@ -42,6 +43,8 @@ DWORD WINAPI initialize(void* instance)
 		return FALSE;
 	}
 
+	hud::initialize();
+
 	while (!GetAsyncKeyState(VK_F9))
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -59,6 +62,7 @@ DWORD WINAPI initialize(void* instance)
 DWORD WINAPI release()
 {
 	hooks::release();
+	hud::release();
 
 #ifdef _DEBUG
 	debug::release();

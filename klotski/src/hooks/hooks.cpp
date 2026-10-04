@@ -1,12 +1,16 @@
-#include "hooks.hpp"
+﻿#include "hooks.hpp"
 
 #include <cstdio>
+#include <cstring>
+#include <cstddef>
+#include <algorithm>
 #include "../signatures.hpp"
 
 #include "../utilities/minhook/MinHook.h"
 #include "../utilities/utilities.hpp"
 #include "../source2-sdk/sdk.hpp"
 #include "../features/visuals/visuals.hpp"
+
 #include "../features/misc/misc.hpp"
 #include "../features/combat/combat.hpp"
 #include "../features/movement/movement.hpp"
@@ -19,6 +23,7 @@
 #include "../utilities/imgui/imgui.h"
 #include "../utilities/imgui/imgui_impl_win32.h"
 #include "../utilities/imgui/imgui_impl_dx11.h"
+
 
 #include <d3d11.h>
 #include <dxgi.h>
@@ -34,6 +39,8 @@ static hooks::swap_chain_resize_buffers::function_t swap_chain_resize_buffers_or
 static hooks::override_view::function_t override_view_original = nullptr;
 static hooks::mouse_input::function_t mouse_input_original = nullptr;
 static hooks::draw_glow::function_t draw_glow_original = nullptr;
+
+
 static hooks::window_procedure::function_t window_procedure_original = nullptr;
 
 static ID3D11Device* device = nullptr;
@@ -54,6 +61,12 @@ bool hooks::initialize()
 	void* override_view_target = utilities::scan_function(L"client.dll", OVERRIDE_VIEW);
 	void* mouse_input_target = utilities::pattern_scan(L"client.dll", MOUSE_INPUT_PATTERN);
 	void* draw_glow_target = utilities::pattern_scan(L"client.dll", DRAW_GLOW_PATTERN);
+	void* skybox_target = utilities::pattern_scan(L"scenesystem.dll", SKYBOXPAT);
+	
+
+	
+	
+	
 
 	for (std::int32_t i = 0; i < 3000 && !GetModuleHandle(L"gameoverlayrenderer64.dll"); i++)
 	{
@@ -67,7 +80,11 @@ bool hooks::initialize()
 	if (!create_move_target) debug::log(L"[-] failed: CREATE_MOVE\n");
 	if (!override_view_target) debug::log(L"[-] failed: OVERRIDE_VIEW\n");
 	if (!mouse_input_target) debug::log(L"[-] failed: MOUSE_INPUT\n");
+	
+
 	if (!draw_glow_target) debug::log(L"[-] failed: DRAW_GLOW\n");
+	if (!skybox_target) debug::log(L"[-] failed: SKYBOXPAT\n");
+	
 	if (!swap_chain_present_target) debug::log(L"[-] failed: PRESENT\n");
 	if (!swap_chain_resize_buffers_target) debug::log(L"[-] failed: RESIZE_BUFFERS\n");
 
@@ -133,6 +150,11 @@ bool hooks::initialize()
 		}
 	}
 
+	if (skybox_target && MH_CreateHook(skybox_target, &hooks::skyboxcolors::hook, reinterpret_cast<void**>(&hooks::skyboxcolors::oskybox)) != MH_OK)
+	{
+		debug::log(L"[-] failed to hook skybox\n");
+	}
+
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
 	{
 		debug::log(L"[-] failed to enable hooks\n");
@@ -142,6 +164,7 @@ bool hooks::initialize()
 	debug::log(L"[+] hooks initialized\n");
 	return true;
 }
+
 
 void hooks::release()
 {
@@ -248,7 +271,7 @@ HRESULT __fastcall hooks::swap_chain_present::hook(IDXGISwapChain* swap_chain, s
 		config.PixelSnapH = true;
 
 		io.Fonts->AddFontDefault(&config);
-		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdanab.ttf", 16.f, &config);
+		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\verdanab.ttf", 13.f, &config);
 
 		ImGui_ImplDX11_CreateDeviceObjects();
 	}
@@ -315,6 +338,8 @@ namespace {
 	}
 }
 
+// won't working i'll recode it
+
 void hooks::chat::chatprintf_color(color_t color, const char* text)
 {
 	if (!text || !text[0]) return;
@@ -370,6 +395,24 @@ bool __fastcall hooks::mouse_input::hook(std::int64_t a1) {
 	return mouse_input_original(a1);
 }
 
+void __fastcall hooks::skyboxcolors::hook(__int64 this_ptr, __int64 render_ctx, __int64 primitive, int count, int render_flags, __int64 view_info, __int64 render_stats) {
+	if (config::context.skybox && count > 0)
+	{
+		const std::uintptr_t skybox_data_add = 0x68 * static_cast<unsigned long long>(count) + static_cast<unsigned long long>(primitive) - 0x50;
+
+		auto* skybox_data = reinterpret_cast<float*>(*reinterpret_cast<std::uintptr_t*>(skybox_data_add));
+
+		if (skybox_data)
+		{
+			skybox_data[0] = config::context.skybox_color[0];
+			skybox_data[1] = config::context.skybox_color[1];
+			skybox_data[2] = config::context.skybox_color[2];
+		}
+	}
+
+	oskybox(this_ptr, render_ctx, primitive, count, render_flags, view_info, render_stats);
+}
+
 LRESULT __stdcall hooks::window_procedure::hook(HWND hwnd, std::uint32_t message, WPARAM wparam, LPARAM lparam)
 {
 	if (message == WM_KEYDOWN && LOWORD(wparam) == VK_INSERT) { menu::open = !menu::open; }
@@ -407,3 +450,4 @@ LRESULT __stdcall hooks::window_procedure::hook(HWND hwnd, std::uint32_t message
 	}
 	return CallWindowProc(window_procedure_original, hwnd, message, wparam, lparam);
 }
+

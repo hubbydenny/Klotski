@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cstdint>
 
 class user_cmd_t;

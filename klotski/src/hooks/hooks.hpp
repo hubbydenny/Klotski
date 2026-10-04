@@ -4,9 +4,7 @@
 #include <utility>
 #include <dxgi.h>
 
-
 class c_view_setup;
-
 namespace hooks
 {
 	bool initialize();
@@ -70,13 +68,16 @@ namespace hooks
 		using function_t = bool(__fastcall*)(std::int64_t);
 		bool __fastcall hook(std::int64_t a1);
 	}
-
+	namespace skyboxcolors {
+		using function_t = void(__fastcall*)(__int64, __int64, __int64, int, int, __int64, __int64);
+		inline function_t oskybox = nullptr;
+		void __fastcall hook(__int64 this_ptr, __int64 render_ctx, __int64 primitive, int count, int render_flags, __int64 view_info, __int64 render_stats);
+	}
 	namespace draw_glow
 	{
 		using function_t = void*(__fastcall*)(void*);
 		void* __fastcall hook(void* glow_property);
 	}
-
 	namespace window_procedure
 	{
 		using function_t = LRESULT(__stdcall*)(HWND, std::uint32_t, WPARAM, LPARAM);

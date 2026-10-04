@@ -8,6 +8,7 @@
 #include "../../source2-sdk/classes/players.hpp"
 #include "../../source2-sdk/classes/weapons.hpp"
 #include "../../source2-sdk/interfaces/visible.hpp"
+#include "../../source2-sdk/interfaces/interfaces.hpp"
 
 #include <array>
 #include <algorithm>
@@ -17,8 +18,7 @@
 #include <cstdio>
 #include <cstring>
 
-typedef struct _box_t
-{
+typedef struct _box_t {
 	float x, y, w, h;
 } box_t;
 
@@ -355,17 +355,16 @@ static void draw_flags(box_t& box, player_t* player, const vec3_t& eye_position,
 			append(distance_text);
 			break;
 		}
-
-		default:
-			break;
+		default: break;
 		}
 	}
 
 	if (length == 0) return;
 
-	renderer::text_centered(box.x, box.y + box.h + 18.f, box.w, box.h,
+		renderer::text_centered(box.x, box.y + box.h + 18.f, box.w, box.h,
 		color_t(tint.r, tint.g, tint.b, static_cast<std::uint8_t>(alpha * 255.f)), buffer);
-}static color_t resolve_esp_color(bool teammate, std::int32_t health, float distance)
+}
+static color_t resolve_esp_color(bool teammate, std::int32_t health, float distance)
 {
 	const float* base = teammate ? config::context.esp_colors_teammate : config::context.esp_colors;
 
@@ -396,15 +395,11 @@ static void draw_flags(box_t& box, player_t* player, const vec3_t& eye_position,
 
 static float resolve_esp_opacity(float distance)
 {
-	if (!config::context.esp_distance_fade || config::context.esp_max_distance <= 0.f)
-	{
-		return std::clamp(config::context.esp_opacity, 0.f, 1.f);
-	}
-
+	if (!config::context.esp_distance_fade || config::context.esp_max_distance <= 0.f) return std::clamp(config::context.esp_opacity, 0.f, 1.f);
 	const float t = std::clamp(distance / config::context.esp_max_distance, 0.f, 1.f);
-
 	return std::clamp(config::context.esp_opacity * (1.f - t), 0.f, 1.f);
 }
+
 
 void visuals::run_player_esp()
 {

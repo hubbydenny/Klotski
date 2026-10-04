@@ -34,7 +34,6 @@ namespace binds
 	inline bool key_down(std::uint32_t key)
 	{
 		if (!key) return false;
-
 		return (GetAsyncKeyState(key) & 0x8000) != 0;
 	}
 

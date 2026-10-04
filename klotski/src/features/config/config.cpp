@@ -69,13 +69,16 @@ namespace
 		{ "glow_color_invincible_b", field_float, &config::context.glow_color_invincible[2], 1 },
 		{ "glow_invincible", field_bool, &config::context.glow_invincible, 1 },
 		{ "glow_alpha", field_float, &config::context.glow_alpha, 1 },
-		{ "glow_brightness", field_float, &config::context.glow_brightness, 1 },
-
-		{ "watermark", field_bool, &config::context.watermark, 1 },
+		{ "glow_brightness", field_float, &config::context.glow_brightness, 1 },{ "watermark", field_bool, &config::context.watermark, 1 },
 		{ "watermark_x", field_float, &config::context.watermark_x, 1 },
 		{ "watermark_y", field_float, &config::context.watermark_y, 1 },
 
 		{ "velocity", field_bool, &config::context.velocity, 1 },
+		{ "skybox", field_bool, &config::context.skybox, 1 },
+		{ "scaleform_hud", field_bool, &config::context.scaleform_hud, 1 },
+		{ "skybox_color_r", field_float, &config::context.skybox_color[0], 1 },
+		{ "skybox_color_g", field_float, &config::context.skybox_color[1], 1 },
+		{ "skybox_color_b", field_float, &config::context.skybox_color[2], 1 },
 		{ "velo_x", field_float, &config::context.velo_x, 1 },
 		{ "velo_y", field_float, &config::context.velo_y, 1 },
 		{ "velo_size", field_float, &config::context.velo_size, 1 },
@@ -85,6 +88,7 @@ namespace
 		{ "onlyvisible", field_bool, &config::context.onlyvisible, 1 },
 		{ "aimbot_smooth", field_bool, &config::context.aimbot_smooth, 1 },
 		{ "aimbot_speed", field_float, &config::context.aimbot_speed, 1 },
+		{ "aimbot_max_distance", field_float, &config::context.aimbot_max_distance, 1 },
 		
 		{ "aim_bones", field_bool_array, config::context.aim_bones, aim_bone_count },
 		{ "bhop", field_bool, &config::context.bhop, 1 },

@@ -129,9 +129,11 @@ void combat::run_aimbot(controller_t* local_controller) {
 	for (std::int32_t i = 1; i <= 64; i++)
 	{
 		controller_t* controller = interfaces::entity_list->get_controller_by_index(i);
-		player_t* player = interfaces::entity_list->get_player_from_controller(controller);
 
 		if (!controller) continue;
+
+		player_t* player = interfaces::entity_list->get_player_from_controller(controller);
+
 		if (!player || player == sdk::local_player) continue;
 		if (!player->is_alive() || player->has_gun_immunity()) continue;
 		if (player->team() == sdk::local_player->team()) continue;
@@ -139,6 +141,18 @@ void combat::run_aimbot(controller_t* local_controller) {
 		game_scene_node_t* scene_node = player->game_scene_node();
 
 		if (!utilities::is_valid_pointer(scene_node) || scene_node->dormant()) continue;
+
+		if (config::context.aimbot_max_distance > 0.f)
+		{
+			const vec3_t origin = scene_node->abs_origin();
+			const float dx = origin.x - local_eye_position.x;
+			const float dy = origin.y - local_eye_position.y;
+			const float dz = origin.z - local_eye_position.z;
+			const float distance_sq = dx * dx + dy * dy + dz * dz;
+			const float max_distance = config::context.aimbot_max_distance;
+
+			if (distance_sq > max_distance * max_distance) continue;
+		}
 
 		float target_fov = best_fov;
 		const vec3_t target_position = get_target_position(player, local_eye_position, *view_angles, target_fov);

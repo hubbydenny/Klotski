@@ -4,6 +4,7 @@
 #include "../../source2-sdk/interfaces/interfaces.hpp"
 #include "../config/config.hpp"
 #include "../config/binds.hpp"
+#include "../hud/hud.hpp"
 
 #include "../../utilities/imgui/imgui.h"
 #include "../../utilities/imgui/imgui_internal.h"
@@ -116,8 +117,11 @@ static const char* key_to_string(std::uint32_t key)
 	case VK_END: return "end";
 	case VK_PRIOR: return "pgup";
 	case VK_NEXT: return "pgdn";
-	case 0x05: return "mouse4";
-	case 0x06: return "mouse5";
+	case VK_LBUTTON:  return "mouse1";
+	case VK_RBUTTON:  return "mouse2";
+	case VK_MBUTTON:  return "mouse3";
+	case VK_XBUTTON1: return "mouse4";
+	case VK_XBUTTON2: return "mouse5";
 	default: break;
 	}
 
@@ -175,11 +179,7 @@ static void bind_checkbox(const char* name, const char* label, bool* value)
 		}
 	}
 
-	if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right))
-	{
-		ImGui::OpenPopup("mode");
-	}
-
+	if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) ImGui::OpenPopup("mode");
 	if (ImGui::BeginPopup("mode"))
 	{
 		for (int m = 0; m < binds::bind_mode_count; m++)
@@ -232,6 +232,7 @@ void menu::render()
 				if (ImGui::BeginPopup("aimbot_popup"))
 				{
 					ImGui::SliderFloat("fov", &config::context.aimbot_fov, 1.f, 30.f, "%.1f");
+					ImGui::SliderFloat("max distance", &config::context.aimbot_max_distance, 0.f, 5000.f, "%.0f");
 					ImGui::Checkbox("visible only", &config::context.onlyvisible);
 					multi_select_combo("aim bones", aim_bones_table, config::context.aim_bones);
 					ImGui::Separator();
@@ -430,6 +431,35 @@ void menu::render()
 					ImGui::SliderFloat("size", &config::context.velo_size, 8.f, 48.f, "%.0f");
 
 					ImGui::EndPopup();
+				}
+
+				ImGui::SameLine();
+				ImGui::Checkbox("skybox", &config::context.skybox);
+
+				if (settings_button("skybox"))
+				{
+					ImGui::OpenPopup("skybox_popup");
+				}
+
+				if (ImGui::BeginPopup("skybox_popup"))
+				{
+					ImGui::ColorEdit3("color", config::context.skybox_color);
+
+					ImGui::EndPopup();
+				}
+
+				ImGui::SameLine();
+
+				if (hud::is_installed())
+				{
+					if (ImGui::Checkbox("scaleform hud", &config::context.scaleform_hud))
+					{
+						hud::set_enabled(config::context.scaleform_hud);
+					}
+				}
+				else
+				{
+					ImGui::TextDisabled("scaleform hud (unavailable)");
 				}
 
 				ImGui::EndTabItem();

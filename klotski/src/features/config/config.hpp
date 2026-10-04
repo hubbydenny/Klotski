@@ -20,6 +20,7 @@ namespace config
 		bool draw_weapon = false;
 		bool draw_skeleton = false;
 		bool draw_flags = false;
+		bool is_flat = false;
 
 		bool box_corner = false;
 		float box_corner_size = 25.f;
@@ -46,6 +47,9 @@ namespace config
 		float watermark_x = 12.f;
 		float watermark_y = 12.f;
 		bool velocity = false;
+		bool skybox = false;
+		bool scaleform_hud = false;
+		float skybox_color[3] = { 1.f, 1.f, 1.f };
 		float velo_x = 500.f;
 		float velo_y = 100.f;
 		float velo_size = 16.f;
@@ -55,6 +59,7 @@ namespace config
 		bool onlyvisible = false;
 		bool aimbot_smooth = false;
 		float aimbot_speed = 60.f;
+		float aimbot_max_distance = 0.f;
 		bool aim_bones[aim_bone_count] = { true };
 		bool standalone_rcs = false;
 		int standalone_rcs_strength = 100;
