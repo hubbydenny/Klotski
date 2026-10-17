@@ -1,6 +1,5 @@
 #include "math.hpp"
-
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
 #include "../../source2-sdk/sdk.hpp"
 
@@ -26,10 +25,7 @@ vec2_t::vec2_t(float x, float y)
 }
 
 vec2_t::~vec2_t()
-{
-
-}
-
+{}
 vec2_t vec2_t::operator+(vec2_t& other)
 {
 	return vec2_t(x + other.x, y + other.y);

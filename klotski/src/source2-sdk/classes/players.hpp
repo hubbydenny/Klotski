@@ -3,7 +3,7 @@
 
 class user_cmd_t;
 
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
 #include "../../utilities/vfunc.hpp"
 #include "../math/math.hpp"
@@ -75,6 +75,7 @@ public:
 	SCHEMA("CPlayer_MovementServices", "m_flMaxSpeed", max_speed, float);
 
 	SCHEMA("CPlayer_MovementServices_Humanoid", "m_flSurfaceFriction", surface_friction, float);
+	SCHEMA("CPlayer_MovementServices_Humanoid", "m_flStepSoundTime", step_sound_time, float);
 
 	SCHEMA("CCSPlayer_MovementServices", "m_nButtonDownMaskPrev", button_down_mask_prev, std::uint64_t);
 	SCHEMA("CCSPlayer_MovementServices", "m_flCmdForwardMove", cmd_forward_mv, std::uint64_t);
@@ -118,6 +119,26 @@ public:
 	SCHEMA("C_BasePlayerPawn", "m_vOldOrigin", old_origin, vec3_t);
 	SCHEMA("C_BasePlayerPawn", "m_hController", controller_handle, entity_handle_t);
 	SCHEMA("C_BasePlayerPawn", "m_flFOVSensitivityAdjust", fov_sensitivity_adjust, float);
+
+	player_movement_services_t* movement()
+	{
+		return movement_services();
+	}
+
+	cs_player_weapon_services_t* weapons()
+	{
+		return weapon_services();
+	}
+
+	cs_player_item_services_t* items()
+	{
+		return item_services();
+	}
+
+	cs_player_base_camera_services_t* camera()
+	{
+		return camera_services();
+	}
 };
 
 class cs_player_pawn_base_t : public base_player_pawn_t
@@ -148,17 +169,10 @@ public:
 	SCHEMA("C_BaseEntity", "m_vecVelocity", velocity, vec3_t);
 	SCHEMA("C_BaseEntity", "m_vecAbsVelocity", abs_velocity, vec3_t);
 
-	vec3_t get_eye_position()
+	vec3_t eye_position()
 	{
-		game_scene_node_t* scene_node = this->game_scene_node();
-
-		if (!utilities::is_valid_pointer(scene_node))
-		{
-			return vec3_t();
-		}
-
-		vec3_t position = scene_node->abs_origin();
-		vec3_t offset = this->view_offset();
+		vec3_t position = abs_origin();
+		const vec3_t offset = this->view_offset();
 
 		position.x += offset.x;
 		position.y += offset.y;
@@ -167,15 +181,19 @@ public:
 		return position;
 	}
 
+	vec3_t get_eye_position()
+	{
+		return eye_position();
+	}
+
 	vec3_t get_aim_punch()
 	{
-		if (!utilities::is_valid_pointer(aim_punch_services())) return vec3_t();
+		if (!aim_punch_services()) return vec3_t();
 
 		using function_t = void(__fastcall*)(void*, vec3_t*, std::int32_t);
 		static function_t fn = reinterpret_cast<function_t>(utilities::scan_function(L"client.dll", C_CSPlayerPawn_GetAimPunch));
 
 		if (!fn) return vec3_t();
-
 		vec3_t punch{};
 		fn(aim_punch_services(), &punch, 0);
 
@@ -184,20 +202,19 @@ public:
 
 	bool has_defuser()
 	{
-		cs_player_item_services_t* services = this->item_services();
-		return utilities::is_valid_pointer(services) && services->has_defuser();
+		cs_player_item_services_t* services = this->items();
+		return services && services->has_defuser();
 	}
 
 	bool has_helmet()
 	{
-		cs_player_item_services_t* services = this->item_services();
-		return utilities::is_valid_pointer(services) && services->has_helmet();
+		cs_player_item_services_t* services = this->items();
+		return services && services->has_helmet();
 	}
 
 	bool has_gun_immunity()
 	{
 		static const std::uint32_t offset = schema_system::get_schema("C_CSPlayerPawn", "m_bGunGameImmunity");
-
 		return offset != 0 && this->gun_immunity();
 	}
 
@@ -211,10 +228,8 @@ public:
 	{
 		using function_t = std::int32_t(__fastcall*)(player_t*, const char*);
 		static function_t fn = reinterpret_cast<function_t>(utilities::scan_function(L"client.dll", GET_BONE_ID_BY_NAME));
-
 		if (!fn || !bone_name) return -1;
 		const std::int32_t bone_index = fn(this, bone_name);
-
 		return bone_index >= 0 && bone_index <= 127 ? bone_index : -1;
 	}
 
@@ -222,47 +237,27 @@ public:
 	{
 		game_scene_node_t* scene_node = this->game_scene_node();
 
-		if (!utilities::is_valid_pointer(scene_node)) return;
-		
-
+		if (!scene_node) return;
 		using function_t = void(__fastcall*)(skeleton_instance_t*, std::uint32_t);
 		static function_t update_bones_fn = reinterpret_cast<function_t>(utilities::scan_function(L"client.dll", CALC_WORLD_SPACE_BONES));
 
-		if (update_bones_fn)
-		{
-			update_bones_fn(scene_node->skeleton_instance(), 0xFFFFF);
-		}
+		if (update_bones_fn) update_bones_fn(scene_node->skeleton_instance(), 0xFFFFF);	
 	}
 
 	bone_data_t* get_bone_cache(std::int32_t* out_count)
 	{
-		if (out_count)
-		{
-			*out_count = 0;
-		}
-
+		if (out_count) *out_count = 0;
 		game_scene_node_t* scene_node = this->game_scene_node();
 
-		if (!utilities::is_valid_pointer(scene_node))
-		{
-			return nullptr;
-		}
+		if (!scene_node) return nullptr;
 
 		model_state_t& model_state = scene_node->skeleton_instance()->model_state();
 
 		bone_data_t* bones = model_state.bones;
 		const std::int32_t count = static_cast<std::int32_t>(model_state.bone_count);
 
-		if (!utilities::is_readable(bones, sizeof(bone_data_t) * count))
-		{
-			return nullptr;
-		}
-
-		if (out_count)
-		{
-			*out_count = count;
-		}
-
+		if (!utilities::is_readable(bones, sizeof(bone_data_t) * count)) return nullptr;
+		if (out_count) *out_count = count;
 		return bones;
 	}
 
@@ -275,9 +270,7 @@ public:
 
 		game_scene_node_t* scene_node = this->game_scene_node();
 
-		if (!utilities::is_valid_pointer(scene_node))	return vec3_t();
-		
-
+		if (!scene_node)	return vec3_t();
 		bone_data_t* bones = scene_node->skeleton_instance()->model_state().bones;
 
 		if (!utilities::is_readable(bones, sizeof(bone_data_t) * (bone_index + 1)))	return vec3_t();
@@ -317,5 +310,6 @@ public:
 	SCHEMA("CCSPlayerController", "m_pInGameMoneyServices", money_services, in_game_money_services_t*);
 	SCHEMA("CCSPlayerController", "m_pInventoryServices", inventory_services, inventory_services_t*);
 	SCHEMA("CCSPlayerController", "m_sSanitizedPlayerName", name, const char*);
-	SCHEMA("CCSPlayerController", "m_bPawnIsAlive", pawn_is_alive, bool);
+	SCHEMA("CCSPlayerController", "m_bPawnIsAlive", is_alive, bool);
+	SCHEMA("CCSPlayerController", "m_hObserverPawn", observer_pawn, entity_handle_t);
 };

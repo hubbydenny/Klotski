@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef> // only for std::size_t | std::uintptr_t
+
 // checkout cs2-sdk.com 
 
 #define FRAME_STAGE_NOTIFY "48 89 5C 24 ? 48 89 6C 24 ? 57 48 83 EC ? 48 8B F9 33 ED"
@@ -8,14 +9,17 @@
 #define RESIZE_BUFFERS_PATTERN "40 53 55 56 57 41 54 41 56 41 57 48 83 EC ? 44 8B E2"
 #define MOUSE_INPUT_PATTERN "40 53 48 83 EC 20 80 B9 ? ? ? ? ? 48 8B D9 75 78"
 #define DRAW_GLOW_PATTERN "40 53 48 83 EC 20 48 8B 54"
+#define FIND_HUD_ELEMENT_PATTERN "40 53 48 83 EC 20 48 8B 05 ? ? ? ? 48 8B D9 48 85 C0 74 ? 48 89 5C 24 38"
+#define HUD_VOICE_PRINT_CALL "E8 ? ? ? ? 4C 39 74 24 ? 74 ? 48 8D 4C 24 ? FF 15 ? ? ? ? 33 D2"
 
 
 #define ENTITY_LIST "48 8B 0D ? ? ? ? 8B D3 E8 ? ? ? ? 48 8B F0"
 #define GET_BASE_ENTITY "4C 8D 49 10 81 FA ? ? 00 00 77 ? 8B CA C1 F9 09"
-#define GET_LOCAL_PLAYER_CONTROLLER "48 83 EC 28 83 F9 FF 75 ? 48 8B 0D ? ? ? ? 48 8D 54 24 30 48 8B 01 FF 90 10 03 00 00 8B 08 48 63 C1"
+#define GET_LOCAL_PLAYER_CONTROLLER "E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 44 8B 45 17 48 8B 38 4C 8B 55 0F 8B 75 0B 44 89 45 BB C7 45 B7 FF FF FF FF"
 
 #define GLOW_MGR "48 8B 05 ? ? ? ? C3 CC CC CC CC CC CC CC CC 8B 41"
 #define IS_IN_GAME "48 8B ? ? ? ? ? 48 85 C0 74 15 80 B8 ? ? ? ? ? 75 0C 83 B8 ? ? ? ? 06"
+#define IS_CONNECTED "48 8B 05 ? ? ? ? 48 85 C0 74 ? 83 B8 ? ? ? ? ? 0F 9D C0"
 
 #define OVERRIDE_VIEW "40 53 57 48 83 EC 58 48 8B FA E8"
 
@@ -43,18 +47,26 @@
 #define GET_BONE_ID_BY_NAME "40 53 48 83 EC 20 48 8B 89 30 03 00 00 48 8B DA 48 8B 01 FF 50 68 48 8B C8"
 
 #define WORLD_TO_SCREEN "48 89 74 24 ? 57 48 83 EC ? 48 83 3D ? ? ? ? ? 48 8B FA"
-#define LOCAL_PRINT_CHAT "4C 89 44 24 ? 4C 89 4C 24 ? 53 B8"
-#define LOCAL_QWORD_CHAT "48 8B 05 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC 48 8B 05 ? ? ? ? 48 8D 0D"
+#define LOCAL_PRINT_CHAT "E8 ? ? ? ? 49 8B 4E ? BA ? ? ? ? 48 83 C1"
+#define LOCAL_QWORD_CHAT "E8 ? ? ? ? 48 8B E8 48 85 C0 0F 84 ? ? ? ? 4C 8D 05"
 
-#define CREATE_SUBTICK_MOVE_STEP "E8 ? ? ? ? 48 8B D0 49 8D 4E 18 E8 ? ? ? ? 4C 8B C8 4C 8D 43 02 49 8B D1 48 8B CE E8 ? ? ? ? 48 8B D8 48 85 C0 0F 84 ? ? ? ? 48 3B 06 0F 83 ? ? ? ? 0F B7 00 66 C7 45 67 ? ? 66 3B 45 67 74 ? E9 ? ? ? ? 40 80 FF ? 0F 85 ? ? ? ? 41 83 4E 10 ?"
-#define PROTOBUF_ADD_TO_REPEATED_PTR_ELEMENT "48 89 5C 24 ? 57 48 83 EC ? 48 8B D9 48 8B FA 48 8B 49 ? 48 85 C9 74 ? 8B 01"
+#define CREATE_SUBTICK_MOVE_STEP "48 8B 54 CA 08 8D 41 01 89 47 08 EB 16 48 8B 0F E8 ? ? ? ? 48 8B D0 48 8B CF"
+#define PROTOBUF_ADD_TO_REPEATED_PTR_ELEMENT "E8 ? ? ? ? 4C 8B D0 45 8B 4A 10"
 
 #define SERIALIZE_MOVE_CRC "48 89 5C 24 20 55 56 57 48 83 EC 30 49 8B C0"
 
 #define GET_VDATA "48 81 EC ? ? ? ? 48 85 C9 75 ? 33 C0 48 81 C4 ? ? ? ? C3"
 
-#define GEN_PRIMITIVES "48 8B C4 48 89 58 08 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 81 EC"
-#define SKYBOXPAT "45 85 C9 0F 8E ? ? ? ? 4C 8B DC"
+#define GENERATE_PRIMITIVES "48 8B C4 48 89 58 08 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 81 EC"
+#define SCENE_ANIMATABLE_GENERATE_PRIMITIVES "48 8B C4 48 89 58 20 4C 89 40 18 48 89 50 10 48 89 48 08"
+#define KV3_ALLOC "40 53 48 83 EC 30 80 FA 06 0F B6 C2 41 B9 16"
+#define KV3_DESTROY "40 57 41 57 48 83 EC 38 4C 8B 01 44 8B FA 49 8B C0 48 8B F9 48 C1 E8 02"
+#define MATERIAL_CREATE "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 4C 8B F2"
+#define SKYBOX_COLOR_PATTERN "F2 0F 10 8F ? ? ? ? 4C 8D 44 24 50 F3 0F 10 9F ? ? ? ?"
+#define GET_VIEW_MODEL_OFFSETS "40 55 53 56 41 56 41 57 48 8B EC 48 83 EC 20 4D 8B F8 4C 8B F2 48 8B F1 E8"
+#define CALC_VIEWMODEL_VIEW "40 53 48 83 EC 60 48 8B 41 08 49 8B D8 8B 48 30 48 C1 E9 0C F6 C1 01 0F 85 48 01 00 00 41 B8 07"
+
+
 
 //scalaformula
 namespace patterns
@@ -65,8 +77,8 @@ namespace patterns
     inline constexpr std::size_t kRunFrameIndex = 5;
     inline constexpr std::size_t kRunScriptIndex = 77;
     inline constexpr std::size_t kMaxVTableSlots = 512;
-
     inline constexpr int kEngineGlobalOffset = 3;
+
     inline constexpr const char* kEngineGlobals[]{"4C 89 35 ?? ?? ?? ?? 48 8B 01", "4C 89 3D ?? ?? ?? ?? 41 8B F7", "48 8B 05 ?? ?? ?? ?? 48 8B 80 F8 0B 00 00 C3", };
     inline constexpr const char* kImageUrl = "40 53 57 41 56 48 81 EC 40 04 00 00";
 }

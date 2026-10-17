@@ -11,11 +11,7 @@ namespace utilities
 		const void** vtable = *reinterpret_cast<const void***>(instance);
 		return reinterpret_cast<function_t>(vtable[index])(instance, args...);
 	}
-
-	}
-
-
-
+}
 #define MEM_PAD_IMPL_2(line, size) std::uint8_t pad_##line[size] = { }
 #define MEM_PAD_IMPL(line, size) MEM_PAD_IMPL_2(line, size)
 #define MEM_PAD(size) MEM_PAD_IMPL(__COUNTER__, size)

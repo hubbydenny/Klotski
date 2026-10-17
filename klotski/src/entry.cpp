@@ -3,23 +3,22 @@
 
 #include "source2-sdk/interfaces/interfaces.hpp"
 #include "source2-sdk/schema_system/schema_system.hpp"
-#include "utilities/debug_console/debug.hpp"
 #include "hooks/hooks.hpp"
 #include "features/menu/menu.hpp"
-#include "features/hud/hud.hpp"
+#include "features/visuals/visuals.hpp"
+#include "utilities/console/console.hpp"
 
 
 DWORD WINAPI initialize(void* instance)
 {
-#ifdef _DEBUG
-	debug::initialize(L"klotski");
-#endif
 
-	debug::log(L"[!] initializing\n");
+	console::initialize();
+
+	console::log("[+] initializing\n");
 
 	if (!interfaces::initialize())
 	{
-		debug::log(L"[-] step failed: interfaces::initialize\n");
+		console::log("[-] step failed: interfaces::initialize\n");
 		MessageBox(nullptr, L"failed to initialize! (interfaces)", L"cs2 error", MB_OK | MB_ICONERROR);
 		FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 		return FALSE;
@@ -28,7 +27,7 @@ DWORD WINAPI initialize(void* instance)
 
 	if (!schema_system::initialize())
 	{
-		debug::log(L"[-] step failed: schema_system::initialize\n");
+		console::log("[-] step failed: schema_system::initialize\n");
 		MessageBox(nullptr, L"failed to initialize! (schema)", L"cs2 error", MB_OK | MB_ICONERROR);
 		FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 		return FALSE;
@@ -37,20 +36,25 @@ DWORD WINAPI initialize(void* instance)
 
 	if (!hooks::initialize())
 	{
-		debug::log(L"[-] step failed: hooks::initialize\n");
+		console::log("[-] step failed: hooks::initialize\n");
 		MessageBox(nullptr, L"failed to initialize! (hooks)", L"cs2 error", MB_OK | MB_ICONERROR);
 		FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 		return FALSE;
 	}
 
-	hud::initialize();
+
+
+	visuals::initialize_hitmarker_events();
+	console::log("[+] features initialized\n");
 
 	while (!GetAsyncKeyState(VK_F9))
 	{
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 
 	menu::open = false;
+	visuals::shutdown_hitmarker_events();
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
@@ -61,12 +65,9 @@ DWORD WINAPI initialize(void* instance)
 
 DWORD WINAPI release()
 {
+	visuals::shutdown_hitmarker_events();
 	hooks::release();
-	hud::release();
 
-#ifdef _DEBUG
-	debug::release();
-#endif
 
 	return TRUE;
 }

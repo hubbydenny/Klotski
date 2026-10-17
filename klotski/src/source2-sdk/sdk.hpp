@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "classes/entities.hpp"
+#include "classes/players.hpp"
 #include "classes/global_vars.hpp"
 
 #include "math/math.hpp"

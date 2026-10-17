@@ -1,10 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="features\combat\combat.cpp" />
-    <ClCompile Include="features\hud\hud.cpp" />
     <ClCompile Include="features\config\config.cpp" />
-    <ClCompile Include="features\changer\changer.cpp" />
     <ClCompile Include="features\movement\movement.cpp" />
     <ClCompile Include="features\movement\prediction\prediction.cpp" />
     <ClCompile Include="hooks\hooks.cpp" />
@@ -16,7 +14,6 @@
     <ClCompile Include="source2-sdk\sdk.cpp" />
     <ClCompile Include="source2-sdk\sdl\sdl.cpp" />
     <ClCompile Include="utilities\console\console.cpp" />
-    <ClCompile Include="utilities\debug_console\debug.cpp" />
     <ClCompile Include="entry.cpp" />
     <ClCompile Include="source2-sdk\interfaces\interfaces.cpp" />
     <ClCompile Include="utilities\imgui\imgui.cpp" />
@@ -34,18 +31,23 @@
     <ClCompile Include="utilities\shadow_vmt\shadow_vmt.cpp" />
     <ClCompile Include="utilities\utilities.cpp" />
     <ClCompile Include="features\visuals\visuals.cpp" />
+    <ClCompile Include="source2-sdk\classes\convars\convars.cpp" />
+    <ClCompile Include="features\menu\fonts\fonts.cpp" />
+    <ClCompile Include="utilities\renderer\w2r\w2r.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="features\combat\combat.hpp" />
     <ClInclude Include="features\config\config.hpp" />
     <ClInclude Include="features\config\binds.hpp" />
-    <ClInclude Include="features\changer\changer.hpp" />
+    <ClInclude Include="source2-sdk\classes\econ_item_schema.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_file_system.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_localize.hpp" />
     <ClInclude Include="features\movement\movement.hpp" />
     <ClInclude Include="features\movement\prediction\prediction.hpp" />
     <ClInclude Include="hooks\hooks.hpp" />
     <ClInclude Include="features\menu\menu.hpp" />
     <ClInclude Include="features\misc\misc.hpp" />
-    <ClInclude Include="signatures.hpp" />
+    <ClInclude Include="utilities\signatures.hpp" />
     <ClInclude Include="source2-sdk\classes\entity.hpp" />
     <ClInclude Include="source2-sdk\classes\players.hpp" />
     <ClInclude Include="source2-sdk\classes\skeleton.hpp" />
@@ -53,10 +55,7 @@
     <ClInclude Include="source2-sdk\classes\weapons.hpp" />
     <ClInclude Include="source2-sdk\classes\trace.hpp" />
     <ClInclude Include="source2-sdk\classes\viewsetup.hpp" />
-    <ClInclude Include="source2-sdk\classes\entities.hpp" />
     <ClInclude Include="source2-sdk\classes\user_cmd.hpp" />
-    <ClInclude Include="source2-sdk\interfaces\inetclient.hpp" />
-    <ClInclude Include="source2-sdk\interfaces\cprediction.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_client.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_engine_client.hpp" />
@@ -69,7 +68,6 @@
     <ClInclude Include="source2-sdk\schema_system\schema_system.hpp" />
     <ClInclude Include="source2-sdk\sdk.hpp" />
     <ClInclude Include="source2-sdk\sdl\sdl.hpp" />
-    <ClInclude Include="utilities\debug_console\debug.hpp" />
     <ClInclude Include="utilities\imgui\imconfig.h" />
     <ClInclude Include="utilities\imgui\imgui.h" />
     <ClInclude Include="utilities\imgui\imgui_impl_dx11.h" />
@@ -93,12 +91,16 @@
     <ClInclude Include="utilities\utilities.hpp" />
     <ClInclude Include="utilities\shadow_vmt\shadow_vmt.hpp" />
     <ClInclude Include="features\visuals\visuals.hpp" />
-    <ClInclude Include="features\hud\hud.hpp" />
-    <ClInclude Include="features\hud\hud_assets.hpp" />
-    <ClInclude Include="features\hud\hud_scripts.hpp" />
+    <ClInclude Include="source2-sdk\classes\convars\convars.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_netclient.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_prediction.hpp" />
+    <ClInclude Include="features\menu\fonts\fonst.hpp" />
+    <ClInclude Include="utilities\renderer\w2r\w2r.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
     <None Include="todo.md" />
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
 </Project>

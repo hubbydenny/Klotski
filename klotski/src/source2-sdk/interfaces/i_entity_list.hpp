@@ -2,9 +2,9 @@
 
 #include <cstdint>
 
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
-#include "../classes/entities.hpp"
+#include "../classes/players.hpp"
 
 class i_entity_list
 {
@@ -28,7 +28,7 @@ public:
 	controller_t* get_local_controller()
 	{
 		using function_t = controller_t*(__fastcall*)(std::int32_t);
-		static function_t fn = reinterpret_cast<function_t>(utilities::scan_function(L"client.dll", GET_LOCAL_PLAYER_CONTROLLER));
+		static function_t fn = reinterpret_cast<function_t>(utilities::scan_call(L"client.dll", GET_LOCAL_PLAYER_CONTROLLER));
 
 		if (fn)
 		{

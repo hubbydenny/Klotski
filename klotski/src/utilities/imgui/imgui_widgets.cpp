@@ -4965,7 +4965,7 @@ void ImGui::DebugNodeInputTextState(ImGuiInputTextState* state)
 //-------------------------------------------------------------------------
 // [SECTION] Widgets: ColorEdit, ColorPicker, ColorButton, etc.
 //-------------------------------------------------------------------------
-// - ColorEdit3()
+// - ColorEdit4()
 // - ColorEdit4()
 // - ColorPicker3()
 // - RenderColorRectWithAlphaCheckerboard() [Internal]

@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
 #include "entity.hpp"
 #include "types.hpp"
@@ -42,6 +42,7 @@ public:
 	SCHEMA("C_EconEntity", "m_nFallbackPaintKit", fallback_paint_kit, std::int32_t);
 	SCHEMA("C_EconEntity", "m_nFallbackSeed", fallback_seed, std::int32_t);
 	SCHEMA("C_EconEntity", "m_flFallbackWear", fallback_wear, float);
+	SCHEMA("C_EconEntity", "m_nFallbackStatTrak", fallback_stat_trak, std::int32_t);
 
 	std::uint64_t get_original_owner_xuid()
 	{
@@ -100,20 +101,6 @@ public:
 
 inline cs_weapon_base_vdata_t* econ_entity_t::get_vdata()
 {
-	using function_t = void* (__fastcall*)(void*);
-	static function_t fn = reinterpret_cast<function_t>(utilities::scan_function(L"client.dll", GET_VDATA));
-
-	if (!fn) return nullptr;
-
-	attribute_container_t* container = &this->attribute_manager();
-
-	if (!utilities::is_valid_pointer(container)) return nullptr;
-
-	econ_item_view_t* item = container->item();
-
-	if (!utilities::is_valid_pointer(item)) return nullptr;
-
-	void* vdata = fn(item);
-
-	return utilities::is_valid_pointer(vdata) ? reinterpret_cast<cs_weapon_base_vdata_t*>(vdata) : nullptr;
+	auto address = reinterpret_cast<const std::uint8_t*>(&subclass_id()) + 0x8;
+	return *reinterpret_cast<cs_weapon_base_vdata_t* const*>(address);
 }

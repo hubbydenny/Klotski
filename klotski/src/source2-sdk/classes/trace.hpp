@@ -2,7 +2,7 @@
 
 #include <cstddef>
 #include <cstdint>
-#include "entities.hpp"
+#include "players.hpp"
 #include "../math/math.hpp"
 
 typedef struct _ray_t

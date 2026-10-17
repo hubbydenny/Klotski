@@ -2,15 +2,15 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
+#include "../../utilities/vfunc.hpp"
 
-#include "../math/math.hpp"
 #include "../math/math.hpp"
 #include "../schema_system/schema_system.hpp"
 #include "skeleton.hpp"
 #include "types.hpp"
 
 class entity_instance_t;
-
 class glow_property_t
 {
 public:
@@ -81,6 +81,15 @@ class entity_instance_t
 {
 public:
 	SCHEMA("CEntityInstance", "m_pEntity", entity_identity, entity_identity_t*);
+
+	bool is_player_pawn()
+	{
+		void* binding = nullptr;
+		utilities::call_virtual<47U, void>(this, &binding);
+		if (!binding) return false;
+		const char* name = *reinterpret_cast<const char**>(reinterpret_cast<std::uint8_t*>(binding) + 0x8);
+		return name && std::strcmp(name, "C_CSPlayerPawn") == 0;
+	}
 };
 
 class entity_spotted_state_t
@@ -94,12 +103,20 @@ class econ_item_view_t
 public:
 	SCHEMA("C_EconItemView", "m_bRestoreCustomMaterialAfterPrecache", restore_custom_material, bool);
 	SCHEMA("C_EconItemView", "m_iItemDefinitionIndex", item_definition_index, std::uint16_t);
+	SCHEMA("C_EconItemView", "m_iEntityQuality", entity_quality, std::int32_t);
 	SCHEMA("C_EconItemView", "m_iItemID", item_id, std::uint64_t);
 	SCHEMA("C_EconItemView", "m_iItemIDLow", item_id_low, std::uint32_t);
 	SCHEMA("C_EconItemView", "m_iItemIDHigh", item_id_high, std::uint32_t);
 	SCHEMA("C_EconItemView", "m_iAccountID", account_id, std::uint32_t);
 	SCHEMA("C_EconItemView", "m_bInitialized", initialized, bool);
 	SCHEMA("C_EconItemView", "m_bDisallowSOC", disallow_soc, bool);
+
+	char* custom_name()
+	{
+		static const std::uint32_t offset = schema_system::get_schema("C_EconItemView", "m_szCustomName");
+		if (offset == 0) return nullptr;
+		return reinterpret_cast<char*>(reinterpret_cast<std::uintptr_t>(this) + offset);
+	}
 };
 
 class attribute_container_t
@@ -118,9 +135,11 @@ public:
 	SCHEMA("C_BaseEntity", "m_iTeamNum", team, std::uint8_t);
 	SCHEMA("C_BaseEntity", "m_fFlags", flags, std::uint32_t);
 	SCHEMA("C_BaseEntity", "m_MoveType", move_type, movetype_t);
+	SCHEMA("C_BaseEntity", "m_nActualMoveType", actual_move_type, std::uint8_t);
 	SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, entity_handle_t);
 	SCHEMA("C_BaseEntity", "m_nSubclassID", subclass_id, std::uint32_t);
 	SCHEMA("C_BaseEntity", "m_flSimulationTime", simulation_time, float);
+	SCHEMA("C_BaseEntity", "m_flGravityScale", gravity_scale, float);
 	SCHEMA("C_BaseEntity", "m_hGroundEntity", ground_entity, entity_handle_t);
 	SCHEMA("C_BaseEntity", "m_vecBaseVelocity", base_velocity, vec3_t);
 	SCHEMA("C_BaseEntity", "m_MoveCollide", move_collide, std::uint8_t);
@@ -133,20 +152,40 @@ public:
 	bool has_flag(std::uint32_t flag)
 	{
 		static const std::uint32_t offset = schema_system::get_schema("C_BaseEntity", "m_fFlags");
-
 		return offset != 0 && (this->flags() & flag) != 0;
+	}
+
+	bool try_abs_origin(vec3_t& out)
+	{
+		game_scene_node_t* scene_node = this->game_scene_node();
+
+		if (!scene_node) return false;
+
+		out = scene_node->abs_origin();
+		return true;
+	}
+
+	vec3_t abs_origin()
+	{
+		vec3_t origin{};
+		try_abs_origin(origin);
+		return origin;
+	}
+
+	bool try_collision_bounds(vec3_t& mins, vec3_t& maxs)
+	{
+		collision_property_t* collision = this->collision_property();
+
+		if (!collision) return false;
+
+		mins = collision->mins();
+		maxs = collision->maxs();
+		return true;
 	}
 
 	vec3_t get_origin()
 	{
-		game_scene_node_t* scene_node = this->game_scene_node();
-
-		if (!scene_node)
-		{
-			return vec3_t();
-		}
-
-		return scene_node->abs_origin();
+		return abs_origin();
 	}
 
 	const char* get_entity_name()

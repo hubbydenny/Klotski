@@ -1,7 +1,7 @@
 #include "../../utilities/utilities.hpp"
 #include "../classes/trace.hpp"
 #include "../math/math.hpp"
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../source2-sdk/interfaces/interfaces.hpp"
 
 static bool is_visible(player_t* local_player, player_t* target, const vec3_t& target_position)
@@ -19,3 +19,11 @@ static bool is_visible(player_t* local_player, player_t* target, const vec3_t& t
 
 	return trace.fraction == 1.f || trace.player == target;
 }
+
+/*
+static bool is_bone_visible(player_t* local_player, player_t* target, const vec3_t& target_position, const vec3_t& bonepos) {
+	if (target) {
+
+	}
+};
+*/

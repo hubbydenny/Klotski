@@ -1,6 +1,5 @@
 #include "sdk.hpp"
-
-#include "../signatures.hpp"
+#include "../utilities/signatures.hpp"
 #include "../utilities/utilities.hpp"
 
 controller_t* sdk::local_controller = nullptr;

@@ -1,8 +1,8 @@
 #include "interfaces.hpp"
 
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
-#include "../../utilities/debug_console/debug.hpp"
+#include "../../utilities/console/console.hpp"
 
 #include <Windows.h>
 
@@ -11,8 +11,11 @@ i_csgo_input* interfaces::csgo_input = nullptr;
 i_engine_client* interfaces::engine = nullptr;
 i_entity_list* interfaces::entity_list = nullptr;
 i_input_system* interfaces::input_system = nullptr;
+i_file_system* interfaces::file_system = nullptr;
+i_localize* interfaces::localize = nullptr;
 i_schema_system* interfaces::schema_system = nullptr;
 i_trace* interfaces::trace = nullptr;
+IEngineCvar* interfaces::cvar = nullptr;
 global_vars_t* interfaces::globals = nullptr;
 
 template<typename T>
@@ -54,6 +57,9 @@ bool interfaces::initialize()
 	interfaces::engine = get_interface<i_engine_client>(L"engine2.dll", "Source2EngineToClient001");
 	interfaces::input_system = get_interface<i_input_system>(L"inputsystem.dll", "InputSystemVersion001");
 	interfaces::schema_system = get_interface<i_schema_system>(L"schemasystem.dll", "SchemaSystem_001");
+	interfaces::file_system = get_interface<i_file_system>(L"filesystem_stdio.dll", "VFileSystem017");
+	interfaces::localize = get_interface<i_localize>(L"localize.dll", "Localize_001");
+	interfaces::cvar = get_interface<IEngineCvar>(L"tier0.dll", "VEngineCvar007");
 
 	std::uint8_t* csgo_input_address = utilities::pattern_scan(L"client.dll", CSGO_INPUT);
 	std::uint8_t* entity_list_address = utilities::pattern_scan(L"client.dll", ENTITY_LIST);
@@ -80,22 +86,27 @@ bool interfaces::initialize()
 		interfaces::globals = *reinterpret_cast<global_vars_t**>(utilities::resolve_rip(global_vars_address, 3, 7));
 	}
 
-	debug::log("[?] trace: match=%p manager=%p\n", trace_address, interfaces::trace);
+//	console::log("[?] trace: match=%p manager=%p\n", trace_address, interfaces::trace);
 
-	if (!interfaces::client) debug::log("[-] failed: client (Source2Client002)\n");
-	if (!interfaces::engine) debug::log("[-] failed: engine\n");
-	if (!interfaces::entity_list) debug::log("[-] failed: ENTITY_LIST\n");
-	if (!interfaces::input_system) debug::log("[-] failed: input_system\n");
-	if (!interfaces::schema_system) debug::log("[-] failed: schema_system\n");
-	if (!interfaces::trace) debug::log("[-] failed: TRACE_MANAGER\n");
-	if (!interfaces::globals) debug::log("[-] failed: GLOBAL_VARS\n");
+	if (!interfaces::client) console::log("[-] failed: client\n");
+	if (!interfaces::engine) console::log("[-] failed: engine\n");
+	if (!interfaces::entity_list) console::log("[-] failed: entitylist\n");
+	if (!interfaces::input_system) console::log("[-] failed: input_system\n");
+	if (!interfaces::file_system) console::log("[-] failed: file_system\n");
+	if (!interfaces::localize) console::log("[-] failed: localize\n");
+	if (!interfaces::schema_system) console::log("[-] failed: schema_system\n");
+	if (!interfaces::trace) console::log("[-] failed: tracemgr\n");
+	if (!interfaces::cvar) console::log("[-] failed: convars\n");
+	if (!interfaces::globals) console::log("[-] failed: globals\n");
+
+	IEngineCvar::Setup();
 
 	if (!interfaces::engine || !interfaces::entity_list || !interfaces::input_system || !interfaces::schema_system || !interfaces::trace || !interfaces::globals)
 	{
-		debug::log("[-] failed to initialize interfaces\n");
+		console::log("[-] failed to initialize interfaces\n");
 		return false;
 	}
 
-	debug::log("[+] interfaces initialized\n");
+	console::log("[+] interfaces initialized\n");
 	return true;
 }

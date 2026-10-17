@@ -5,6 +5,8 @@
 #include <dxgi.h>
 
 class c_view_setup;
+class i_csgo_input;
+class i_input_system;
 namespace hooks
 {
 	bool initialize();
@@ -39,44 +41,35 @@ namespace hooks
 		using function_t = void(__fastcall*)(void*, c_view_setup*);
 		void __fastcall hook(void* client_mode, c_view_setup* view_setup);
 	}
-	namespace chat {
-		enum color_t : std::uint32_t
-		{
-			color_white = 1,
-			color_red = 2,
-			color_light_purple = 3,
-			color_green = 4,
-			color_light_green = 5,
-			color_light_green_2 = 6,
-			color_light_red = 7,
-			color_gray = 8,
-			color_light_yellow = 9,
-			color_gray_blue = 10,
-			color_light_blue = 11,
-			color_light_blue_2 = 12,
-			color_light_purple_2 = 13,
-			color_light_red_2 = 14,
-			color_orange = 15,
-			color_orange_2 = 16,
-		};
-
-		void chatprintf(const char* text);
-		void chatprintf_color(color_t color, const char* text);
-	}
 	namespace mouse_input
 	{
-		using function_t = bool(__fastcall*)(std::int64_t);
-		bool __fastcall hook(std::int64_t a1);
+		using function_t = bool(__fastcall*)(i_csgo_input*);
+		bool __fastcall hook(i_csgo_input* input);
+	}
+	namespace relative_mouse
+	{
+		using function_t = void*(__fastcall*)(i_input_system*, bool);
+		void* __fastcall hook(i_input_system* input, bool enabled);
 	}
 	namespace skyboxcolors {
-		using function_t = void(__fastcall*)(__int64, __int64, __int64, int, int, __int64, __int64);
-		inline function_t oskybox = nullptr;
-		void __fastcall hook(__int64 this_ptr, __int64 render_ctx, __int64 primitive, int count, int render_flags, __int64 view_info, __int64 render_stats);
+		bool initialize();
+		void run();
+		void release();
 	}
 	namespace draw_glow
 	{
 		using function_t = void*(__fastcall*)(void*);
 		void* __fastcall hook(void* glow_property);
+	}
+	namespace generate_primitives
+	{
+		using function_t = std::int64_t(__fastcall*)(std::uintptr_t, std::uintptr_t, std::uintptr_t, std::uintptr_t);
+		std::int64_t __fastcall hook(std::uintptr_t thisptr, std::uintptr_t scene_object, std::uintptr_t scene_view, std::uintptr_t primitive_buffer);
+	}
+	namespace viewmodel_offsets
+	{
+		using function_t = void(__fastcall*)(void*, float*, float*);
+		void __fastcall hook(void* viewmodel, float* offsets, float* fov);
 	}
 	namespace window_procedure
 	{
@@ -84,3 +77,4 @@ namespace hooks
 		LRESULT __stdcall hook(HWND hwnd, std::uint32_t message, WPARAM wparam, LPARAM lparam);
 	}
 }
+

@@ -6,6 +6,8 @@
 #include "../../source2-sdk/interfaces/i_trace.hpp"
 #include "../../source2-sdk/interfaces/visible.hpp"
 
+static float compute_rcs_factor(int rand_min, int rand_max);
+
 static vec3_t get_target_position(player_t* player, const vec3_t& eye_position, const vec3_t& view_angles, float& best_fov)
 {
 	player->update_bones();
@@ -67,14 +69,9 @@ static vec3_t get_target_position(player_t* player, const vec3_t& eye_position, 
 		return best_position;
 	}
 
-	game_scene_node_t* scene_node = player->game_scene_node();
+	vec3_t fallback{};
+	if (!player->try_abs_origin(fallback)) return vec3_t();
 
-	if (!utilities::is_valid_pointer(scene_node))
-	{
-		return vec3_t();
-	}
-
-	vec3_t fallback = scene_node->abs_origin();
 	fallback.z += player->view_offset().z;
 
 	const float fov = math::angle_distance(eye_position, fallback, view_angles);
@@ -88,8 +85,7 @@ static vec3_t get_target_position(player_t* player, const vec3_t& eye_position, 
 
 void combat::run_rcs()
 {
-	if (!interfaces::csgo_input) return;
-	if (!interfaces::engine->is_in_game()) return;
+	if (!interfaces::csgo_input || !interfaces::engine || !interfaces::engine->is_in_game()) return;
 	if (!sdk::local_player || !sdk::local_player->is_alive()) return;
 
 	vec3_t* view_angles = interfaces::csgo_input->get_view_angles(0);
@@ -106,11 +102,10 @@ void combat::run_rcs()
 			config::context.standalone_rcs_strength,
 			config::context.standalone_rcs_min,
 			config::context.standalone_rcs_max,
-			!config::context.aimbot
+			true
 		);
 	}
-
-	}
+}
 
 void combat::run_aimbot(controller_t* local_controller) {
 	if (!local_controller || !interfaces::csgo_input) return;
@@ -120,7 +115,7 @@ void combat::run_aimbot(controller_t* local_controller) {
 	vec3_t* view_angles = interfaces::csgo_input->get_view_angles(0);
 
 	if (!view_angles) return;
-	const vec3_t local_eye_position = sdk::local_player->get_eye_position();
+	const vec3_t local_eye_position = sdk::local_player->eye_position();
 
 	float best_fov = config::context.aimbot_fov;
 	vec3_t best_position = vec3_t();
@@ -139,12 +134,11 @@ void combat::run_aimbot(controller_t* local_controller) {
 		if (player->team() == sdk::local_player->team()) continue;
 
 		game_scene_node_t* scene_node = player->game_scene_node();
-
-		if (!utilities::is_valid_pointer(scene_node) || scene_node->dormant()) continue;
-
+		if (!scene_node || scene_node->dormant()) continue;
 		if (config::context.aimbot_max_distance > 0.f)
 		{
-			const vec3_t origin = scene_node->abs_origin();
+			vec3_t origin{};
+			if (!player->try_abs_origin(origin)) continue;
 			const float dx = origin.x - local_eye_position.x;
 			const float dy = origin.y - local_eye_position.y;
 			const float dz = origin.z - local_eye_position.z;
@@ -177,19 +171,27 @@ void combat::run_aimbot(controller_t* local_controller) {
 		if (seen_enemy && !logged_seen)
 		{
 			logged_seen = true;
-			debug::log("[-] aimbot: enemy found but outside fov\n");
+			//console::log("[-] aimbot: enemy found but outside fov\n");
 		}
 
 		if (!seen_enemy && !logged_missing)
 		{
 			logged_missing = true;
-			debug::log("[-] aimbot: no enemy found\n");
+		//	console::log("[-] aimbot: no enemy found\n");
 		}
 
 		return;
 	}
 
 	vec3_t aim_delta = math::calculate_angle(local_eye_position, best_position, *view_angles);
+	if (config::context.standalone_rcs && sdk::local_player->shots_fired() > 1)
+	{
+		const float scale = static_cast<float>(config::context.standalone_rcs_strength) / 100.f;
+		const float factor = compute_rcs_factor(config::context.standalone_rcs_min, config::context.standalone_rcs_max);
+		const vec3_t aim_punch = sdk::local_player->get_aim_punch();
+		aim_delta.x -= aim_punch.x * scale * factor;
+		aim_delta.y = normalize_yaw(aim_delta.y - aim_punch.y * scale * factor);
+	}
 
 	if (config::context.aimbot_smooth)
 	{
@@ -211,7 +213,7 @@ void combat::run_aimbot(controller_t* local_controller) {
 	if (!logged_aim)
 	{
 		logged_aim = true;
-		debug::log("[+] aimbot: aiming\n");
+		//console::log("[+] aimbot: aiming\n");
 	}
 }
 static float compute_rcs_factor(int rand_min, int rand_max)

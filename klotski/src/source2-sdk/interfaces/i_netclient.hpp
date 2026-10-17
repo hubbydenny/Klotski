@@ -1,13 +1,12 @@
 #pragma once
 #include "../../utilities/utilities.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/vfunc.hpp"
 #include "../classes/trace.hpp"
 #include "../math/math.hpp"
-#include "../../signatures.hpp"
 #include "../../source2-sdk/interfaces/interfaces.hpp"
 
-class CNetChannelInfo
-{
+class CNetChannelInfo {
 public:
 	[[nodiscard]] const char* GetName()
 	{

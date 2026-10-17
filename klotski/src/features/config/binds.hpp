@@ -7,8 +7,6 @@
 
 #include <Windows.h>
 
-// velocity cuz im lazy :D
-
 namespace binds
 {
 	enum bind_mode_t : std::int32_t
@@ -27,6 +25,7 @@ namespace binds
 		bool* value = nullptr;
 		bool previous = false;
 		bool capturing = false;
+		bool capture_ready = false;
 	};
 
 	inline std::vector<bind_t> list;
@@ -39,11 +38,7 @@ namespace binds
 
 	inline std::size_t get(const std::string& name, bool* value)
 	{
-		for (std::size_t i = 0; i < list.size(); i++)
-		{
-			if (list[i].value == value) return i;
-		}
-
+		for (std::size_t i = 0; i < list.size(); i++) if (list[i].value == value) return i;
 		list.push_back({ name, 0, bind_hold, value, false, false });
 
 		return list.size() - 1;
@@ -58,7 +53,23 @@ namespace binds
 	{
 		for (bind_t& bind : list)
 		{
-			if (!bind.value || !bind.key) continue;
+			if (!bind.value) continue;
+			if (menu_open || bind.capturing)
+			{
+				bind.previous = key_down(bind.key);
+				if (!menu_open)
+				{
+					bind.capturing = false;
+					bind.capture_ready = false;
+				}
+				continue;
+			}
+			if (bind.mode == bind_always)
+			{
+				*bind.value = true;
+				continue;
+			}
+			if (!bind.key) continue;
 
 			const bool down = key_down(bind.key);
 

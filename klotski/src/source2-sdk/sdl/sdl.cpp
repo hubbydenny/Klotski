@@ -19,10 +19,7 @@ void sdl::set_relative_mouse_mode(bool mode)
 	using function_t = std::int32_t(__stdcall*)(bool);
 	static function_t fn = reinterpret_cast<function_t>(get_sdl_proc("SDL_SetRelativeMouseMode"));
 
-	if (!fn)
-	{
-		return;
-	}
+	if (!fn) return;
 
 	fn(mode);
 }
@@ -37,10 +34,7 @@ void sdl::set_window_polling_mode(void* window, bool mode)
 		fn = reinterpret_cast<function_t>(get_sdl_proc("SDL_SetWindowGrab"));
 	}
 
-	if (!fn || !window)
-	{
-		return;
-	}
+	if (!fn || !window) return;
 
 	fn(window, mode);
 }
@@ -50,10 +44,7 @@ void sdl::set_mouse_warp_position(void* window, std::int32_t x, std::int32_t y)
 	using function_t = std::int32_t(__stdcall*)(void*, float, float);
 	static function_t fn = reinterpret_cast<function_t>(get_sdl_proc("SDL_WarpMouseInWindow"));
 
-	if (!fn || !window)
-	{
-		return;
-	}
+	if (!fn || !window) return;
 
 	fn(window, static_cast<float>(x), static_cast<float>(y));
 }

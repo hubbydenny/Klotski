@@ -1,7 +1,7 @@
 #include "schema_system.hpp"
 
 #include "../interfaces/interfaces.hpp"
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
 
 #include <unordered_map>
@@ -13,7 +13,7 @@ bool schema_system::initialize()
 {
 	if (!interfaces::schema_system)
 	{
-		debug::log("[-] failed to initialize schema system (no interface)\n");
+		console::log("[-] failed to initialize schema system (no interface)\n");
 		return false;
 	}
 
@@ -93,7 +93,7 @@ bool schema_system::initialize()
 
 	if (schema_data.empty())
 	{
-		debug::log("[-] failed to initialize schema system\n");
+		console::log("[-] failed to initialize schema system\n");
 		return false;
 	}
 	return true;

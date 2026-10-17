@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstring>
 
-#include "../../signatures.hpp"
+#include "../../utilities/signatures.hpp"
 #include "../../utilities/utilities.hpp"
 #include "../math/math.hpp"
 #include "types.hpp"
@@ -25,15 +25,15 @@ public:
 	std::uint32_t has_bits;
 	std::int32_t cached_size;
 	std::uint64_t buttonstate1;
-	std::uint64_t buttonstate2;
-	std::uint64_t buttonstate3;
+	std::uint64_t buttons2;
+	std::uint64_t buttons3;
 };
 
 static_assert(offsetof(cin_button_state_pb_t, has_bits) == 0x10, "cin_button_state_pb_t has wrong size");
 static_assert(offsetof(cin_button_state_pb_t, cached_size) == 0x14, "cin_button_state_pb_t has wrong size");
 static_assert(offsetof(cin_button_state_pb_t, buttonstate1) == 0x18, "cin_button_state_pb_t has wrong size");
-static_assert(offsetof(cin_button_state_pb_t, buttonstate2) == 0x20, "cin_button_state_pb_t has wrong size");
-static_assert(offsetof(cin_button_state_pb_t, buttonstate3) == 0x28, "cin_button_state_pb_t has wrong size");
+static_assert(offsetof(cin_button_state_pb_t, buttons2) == 0x20, "cin_button_state_pb_t has wrong size");
+static_assert(offsetof(cin_button_state_pb_t, buttons3) == 0x28, "cin_button_state_pb_t has wrong size");
 static_assert(sizeof(cin_button_state_pb_t) == 0x30, "cin_button_state_pb_t has wrong size");
 
 class protobuf_repeated_ptr_field_t
@@ -42,7 +42,7 @@ public:
 	struct rep_t
 	{
 		std::int32_t allocated_size;
-		void** elements;
+		void* elements[1];
 	};
 
 	void* arena;
@@ -96,6 +96,35 @@ public:
 	{
 		has_bits |= 0x4u;
 		when = value;
+	}
+
+	void set_analog_forward_delta(float value)
+	{
+		has_bits |= 0x8u;
+		analog_forward_delta = value;
+	}
+
+	void set_analog_left_delta(float value)
+	{
+		has_bits |= 0x10u;
+		analog_left_delta = value;
+	}
+
+	void set_pitch_delta(float value)
+	{
+		has_bits |= 0x20u;
+		pitch_delta = value;
+	}
+
+	void set_yaw_delta(float value)
+	{
+		has_bits |= 0x40u;
+		yaw_delta = value;
+	}
+
+	bool has_movement() const
+	{
+		return (has_bits & 0x79u) != 0;
 	}
 };
 
@@ -159,13 +188,13 @@ public:
 	protobuf_repeated_ptr_field_t subtick_moves;
 	void* move_crc;
 	cin_button_state_pb_t* buttons;
-	cmd_qangle_t* viewangles;
+	cmd_qangle_t* view_angles;
 	void* execution_notes;
 	std::int32_t legacy_command_number;
 	std::int32_t client_tick;
-	float forwardmove;
-	float leftmove;
-	float upmove;
+	float forward_move;
+	float side_move;
+	float up_move;
 	std::int32_t impulse;
 	std::int32_t weaponselect;
 	std::int32_t random_seed;
@@ -182,13 +211,13 @@ static_assert(offsetof(cbase_user_cmd_pb_t, cached_size) == 0x14, "cbase_user_cm
 static_assert(offsetof(cbase_user_cmd_pb_t, subtick_moves) == 0x18, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, move_crc) == 0x30, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, buttons) == 0x38, "cbase_user_cmd_pb_t has wrong size");
-static_assert(offsetof(cbase_user_cmd_pb_t, viewangles) == 0x40, "cbase_user_cmd_pb_t has wrong size");
+static_assert(offsetof(cbase_user_cmd_pb_t, view_angles) == 0x40, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, execution_notes) == 0x48, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, legacy_command_number) == 0x50, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, client_tick) == 0x54, "cbase_user_cmd_pb_t has wrong size");
-static_assert(offsetof(cbase_user_cmd_pb_t, forwardmove) == 0x58, "cbase_user_cmd_pb_t has wrong size");
-static_assert(offsetof(cbase_user_cmd_pb_t, leftmove) == 0x5C, "cbase_user_cmd_pb_t has wrong size");
-static_assert(offsetof(cbase_user_cmd_pb_t, upmove) == 0x60, "cbase_user_cmd_pb_t has wrong size");
+static_assert(offsetof(cbase_user_cmd_pb_t, forward_move) == 0x58, "cbase_user_cmd_pb_t has wrong size");
+static_assert(offsetof(cbase_user_cmd_pb_t, side_move) == 0x5C, "cbase_user_cmd_pb_t has wrong size");
+static_assert(offsetof(cbase_user_cmd_pb_t, up_move) == 0x60, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, impulse) == 0x64, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, weaponselect) == 0x68, "cbase_user_cmd_pb_t has wrong size");
 static_assert(offsetof(cbase_user_cmd_pb_t, random_seed) == 0x6C, "cbase_user_cmd_pb_t has wrong size");
@@ -235,9 +264,9 @@ public:
 	std::int64_t command_number_value;
 	csgo_user_cmd_pb_t cmd;
 	void* button_state_vtable;
-	std::uint64_t buttonstate1;
-	std::uint64_t buttonstate2;
-	std::uint64_t buttonstate3;
+	std::uint64_t buttons;
+	std::uint64_t buttons2;
+	std::uint64_t buttons3;
 	char pad1[0x1C];
 	std::int32_t subtick_state;
 
@@ -262,12 +291,12 @@ public:
 		cbase_user_cmd_pb_t* base = get_base();
 
 		if (!base) return nullptr;
-		return utilities::is_valid_pointer(base->viewangles) ? base->viewangles : nullptr;
+		return utilities::is_valid_pointer(base->view_angles) ? base->view_angles : nullptr;
 	}
 
 	bool is_button_down(std::uint64_t buttons)
 	{
-		return (buttonstate1 & buttons) != 0;
+		return (this->buttons & buttons) != 0;
 	}
 
 	std::int32_t command_number()
@@ -297,13 +326,13 @@ public:
 		if (!serialize_move_crc) return false;
 
 		const cin_button_state_pb_t* buttons = utilities::is_valid_pointer(base->buttons) ? base->buttons : nullptr;
-		const cmd_qangle_t* view = utilities::is_valid_pointer(base->viewangles) ? base->viewangles : nullptr;
+		const cmd_qangle_t* view = utilities::is_valid_pointer(base->view_angles) ? base->view_angles : nullptr;
 
 		const std::uint64_t button_states[3] =
 		{
 			buttons ? buttons->buttonstate1 : 0ull,
-			buttons ? buttons->buttonstate2 : 0ull,
-			buttons ? buttons->buttonstate3 : 0ull
+			buttons ? buttons->buttons2 : 0ull,
+			buttons ? buttons->buttons3 : 0ull
 		};
 		const float angles[3] = { view ? view->angles.x : 0.f, view ? view->angles.y : 0.f, view ? view->angles.z : 0.f };
 
@@ -381,32 +410,29 @@ public:
 	{
 		cin_button_state_pb_t* buttons = get_proto_buttons();
 
-		if (!buttons)
-		{
-			return;
-		}
+		if (!buttons) return;
 
 		cbase_user_cmd_pb_t* base = get_base();
 
 		base->has_bits |= cbase_user_cmd_pb_t::has_buttons;
 		buttons->has_bits |= 0x7u;
-		buttons->buttonstate1 = buttonstate1;
-		buttons->buttonstate2 = buttonstate2;
-		buttons->buttonstate3 = buttonstate3;
+		buttons->buttonstate1 = this->buttons;
+		buttons->buttons2 = buttons2;
+		buttons->buttons3 = buttons3;
 	}
 
 	void set_buttons(std::uint64_t buttons, bool state)
 	{
 		if (state)
 		{
-			buttonstate1 |= buttons;
-			buttonstate2 |= buttons;
+			this->buttons |= buttons;
+			buttons2 |= buttons;
 		}
 		else
 		{
-			buttonstate1 &= ~buttons;
-			buttonstate2 &= ~buttons;
-			buttonstate3 &= ~buttons;
+			this->buttons &= ~buttons;
+			buttons2 &= ~buttons;
+			buttons3 &= ~buttons;
 		}
 
 		sync_buttons();
@@ -423,8 +449,8 @@ public:
 
 		if (!base) return;
 		base->has_bits |= cbase_user_cmd_pb_t::has_forwardmove | cbase_user_cmd_pb_t::has_leftmove;
-		base->forwardmove = forward;
-		base->leftmove = left;
+		base->forward_move = forward;
+		base->side_move = left;
 	}
 
 	void set_view_angles(vec3_t angles)
@@ -446,64 +472,115 @@ public:
 		base->subtick_moves.current_size = 0;
 	}
 
-	void add_subtick(buttons_t button, bool pressed, float when)
+	subtick_move_step_t* get_subtick(std::int32_t index)
 	{
 		cbase_user_cmd_pb_t* base = get_base();
 
-		if (!base) return;
-		protobuf_repeated_ptr_field_t* field = &base->subtick_moves;
-		if (!utilities::is_readable(field, sizeof(protobuf_repeated_ptr_field_t))) return;
-		
+		if (!base) return nullptr;
+		if (index < 0 || index >= base->subtick_moves.current_size) return nullptr;
 
-		subtick_move_step_t* step = nullptr;
-		protobuf_repeated_ptr_field_t::rep_t* rep = field->rep;
+		protobuf_repeated_ptr_field_t::rep_t* rep = base->subtick_moves.rep;
+		if (!rep || !utilities::is_readable(rep, sizeof(protobuf_repeated_ptr_field_t::rep_t))) return nullptr;
+		if (index >= rep->allocated_size || index >= base->subtick_moves.capacity) return nullptr;
+		if (!utilities::is_readable(rep->elements, sizeof(void*) * (index + 1))) return nullptr;
 
-		if (rep && utilities::is_readable(rep, sizeof(protobuf_repeated_ptr_field_t::rep_t)))
+		subtick_move_step_t* step = reinterpret_cast<subtick_move_step_t*>(rep->elements[index]);
+		return utilities::is_readable(step, sizeof(subtick_move_step_t)) ? step : nullptr;
+	}
+
+	std::int32_t subtick_count()
+	{
+		cbase_user_cmd_pb_t* base = get_base();
+		return base ? base->subtick_moves.current_size : 0;
+	}
+
+	bool has_movement_subticks()
+	{
+		const std::int32_t count = subtick_count();
+
+		for (std::int32_t i = 0; i < count; i++)
 		{
-			const std::int32_t index = field->current_size;
-			const std::int32_t allocated = rep->allocated_size;
+			subtick_move_step_t* step = get_subtick(i);
+			if (step && step->has_movement()) return true;
+		}
 
-			if (index >= 0 && allocated > 0 && index < allocated && allocated <= 512 && utilities::is_readable(rep->elements, sizeof(void*) * (index + 1)))
+		return false;
+	}
+
+	subtick_move_step_t* acquire_subtick()
+	{
+		cbase_user_cmd_pb_t* base = get_base();
+		if (!base) return nullptr;
+
+		protobuf_repeated_ptr_field_t& moves = base->subtick_moves;
+		if (moves.current_size < 0 || moves.current_size >= 30) return nullptr;
+		if (moves.rep && moves.current_size < moves.rep->allocated_size)
+		{
+			auto step = reinterpret_cast<subtick_move_step_t*>(moves.rep->elements[moves.current_size]);
+			if (step)
 			{
-				subtick_move_step_t* reused = reinterpret_cast<subtick_move_step_t*>(rep->elements[index]);
-
-				if (utilities::is_readable(reused, sizeof(subtick_move_step_t)))
-				{
-					field->current_size++;
-					reused->has_bits = 0;
-					reused->cached_size = 0;
-					reused->button = 0;
-					reused->pressed = false;
-					reused->when = 0.f;
-					reused->analog_forward_delta = 0.f;
-					reused->analog_left_delta = 0.f;
-					reused->pitch_delta = 0.f;
-					reused->yaw_delta = 0.f;
-					step = reused;
-				}
+				moves.current_size++;
+				if (moves.capacity < moves.current_size) moves.capacity = moves.current_size;
+				return step;
 			}
 		}
 
-		if (!step)
+		using allocate_t = subtick_move_step_t*(__fastcall*)(void*);
+		using append_t = subtick_move_step_t*(__fastcall*)(protobuf_repeated_ptr_field_t*, subtick_move_step_t*);
+		static allocate_t allocate = []() -> allocate_t
 		{
-			using create_fn_t = subtick_move_step_t*(__fastcall*)(void*);
-			using add_fn_t = void*(__fastcall*)(void*, void*);
-
-			static create_fn_t create_subtick = reinterpret_cast<create_fn_t>(utilities::scan_call(L"client.dll", CREATE_SUBTICK_MOVE_STEP));
-			static add_fn_t add_to_repeated = reinterpret_cast<add_fn_t>(utilities::scan_function(L"client.dll", PROTOBUF_ADD_TO_REPEATED_PTR_ELEMENT));
-
-			if (!create_subtick || !add_to_repeated || !field->arena) return;
-
-			step = create_subtick(field->arena);
-
-			if (!utilities::is_readable(step, sizeof(subtick_move_step_t))) return;
-
-			add_to_repeated(field, step);
+			auto match = utilities::pattern_scan(L"client.dll", CREATE_SUBTICK_MOVE_STEP);
+			return match ? reinterpret_cast<allocate_t>(utilities::resolve_rip(match + 16, 1, 5)) : nullptr;
+		}();
+		static append_t append = []() -> append_t
+		{
+			auto match = utilities::pattern_scan(L"client.dll", PROTOBUF_ADD_TO_REPEATED_PTR_ELEMENT);
+			return match ? reinterpret_cast<append_t>(utilities::resolve_rip(match, 1, 5)) : nullptr;
+		}();
+		if (!allocate || !append)
+		{
+			static bool logged = false;
+			if (!logged)
+			{
+				logged = true;
+				console::log("[-] subtick: missing allocator=%p append=%p\n", reinterpret_cast<void*>(allocate), reinterpret_cast<void*>(append));
+			}
+			return nullptr;
 		}
 
+		auto step = allocate(moves.arena);
+		if (!step) return nullptr;
+		return append(&moves, step);
+	}
+
+	void add_subtick(buttons_t button, bool pressed, float when)
+	{
+		subtick_move_step_t* step = acquire_subtick();
+
+		if (!step) return;
 		step->set_button(static_cast<std::uint64_t>(button));
 		step->set_pressed(pressed);
 		step->set_when(when);
+	}
+
+	void add_movement_subtick(float when, float forward_delta, float left_delta, float yaw_delta = 0.f, float pitch_delta = 0.f)
+	{
+		subtick_move_step_t* step = acquire_subtick();
+
+		if (!step) return;
+		step->set_button(0);
+		step->set_pressed(false);
+		step->set_when(when);
+		step->set_analog_forward_delta(forward_delta);
+		step->set_analog_left_delta(left_delta);
+
+		if (yaw_delta != 0.f) step->set_yaw_delta(yaw_delta);
+		if (pitch_delta != 0.f) step->set_pitch_delta(pitch_delta);
+	}
+
+	bool is_subtick_overwrite() const
+	{
+		return subtick_state == 2;
 	}
 };
 
@@ -511,8 +588,9 @@ static_assert(offsetof(user_cmd_t, vtable) == 0x0, "user_cmd_t has wrong size");
 static_assert(offsetof(user_cmd_t, command_number_value) == 0x8, "user_cmd_t has wrong size");
 static_assert(offsetof(user_cmd_t, cmd) == 0x10, "user_cmd_t has wrong size");
 static_assert(offsetof(user_cmd_t, button_state_vtable) == 0x58, "user_cmd_t has wrong size");
-static_assert(offsetof(user_cmd_t, buttonstate1) == 0x60, "user_cmd_t has wrong size");
-static_assert(offsetof(user_cmd_t, buttonstate2) == 0x68, "user_cmd_t has wrong size");
-static_assert(offsetof(user_cmd_t, buttonstate3) == 0x70, "user_cmd_t has wrong size");
+static_assert(offsetof(user_cmd_t, buttons) == 0x60, "user_cmd_t has wrong size");
+static_assert(offsetof(user_cmd_t, buttons2) == 0x68, "user_cmd_t has wrong size");
+static_assert(offsetof(user_cmd_t, buttons3) == 0x70, "user_cmd_t has wrong size");
 static_assert(offsetof(user_cmd_t, subtick_state) == 0x94, "user_cmd_t has wrong size");
 static_assert(sizeof(user_cmd_t) == 0x98, "user_cmd_t has wrong size");
+

@@ -12,12 +12,22 @@ void renderer::rect(float x, float y, float w, float h, color_t color)
 
 void renderer::line(float x1, float y1, float x2, float y2, color_t color)
 {
-	ImGui::GetBackgroundDrawList()->AddLine(ImVec2(x1, y1), ImVec2(x2, y2), color.dump(), 1.5f);
+	line(x1, y1, x2, y2, color, 1.5f);
+}
+
+void renderer::line(float x1, float y1, float x2, float y2, color_t color, float thickness)
+{
+	ImGui::GetBackgroundDrawList()->AddLine(ImVec2(x1, y1), ImVec2(x2, y2), color.dump(), thickness);
 }
 
 void renderer::filled_rect(float x, float y, float w, float h, color_t color)
 {
 	ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(x, y), ImVec2(x + w, y + h), color.dump());
+}
+
+void renderer::filled_triangle(float x1, float y1, float x2, float y2, float x3, float y3, color_t color)
+{
+	ImGui::GetBackgroundDrawList()->AddTriangleFilled(ImVec2(x1, y1), ImVec2(x2, y2), ImVec2(x3, y3), color.dump());
 }
 
 void renderer::circle(float x, float y, float r, color_t color, int num_segments, float thickness)
@@ -27,9 +37,10 @@ void renderer::circle(float x, float y, float r, color_t color, int num_segments
 
 static ImFont* indicator_font()
 {
-	ImFont* font = ImGui::GetIO().Fonts->Fonts[1];
-
-	return font ? font : ImGui::GetIO().Fonts->Fonts[0];
+	if (!ImGui::GetCurrentContext()) return nullptr;
+	auto atlas = ImGui::GetIO().Fonts;
+	if (atlas && atlas->Fonts.Size > 1 && atlas->Fonts[1]) return atlas->Fonts[1];
+	return ImGui::GetFont();
 }
 
 static void draw_text(float x, float y, color_t color, const char* text, const renderer::text_options_t& options)
